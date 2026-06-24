@@ -3,598 +3,529 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🌻Osaka Summer Zepp Tour🎵</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>🌻 Osaka Summer Zepp Tour 🎵</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
-:root {
-/* 夏日活力調色盤 */
---bg-top: #e0f7fa;
---bg-bottom: #80deea;
---text-main: #263238;
---text-light: #546e7a;
-
-/* 標籤主題色 /
---c-sunflower: #ffca28; / 向日葵黃 /
---c-zepp: #ff4081; / 演唱會粉 /
---c-sky: #03a9f4; / 晴空藍 /
---c-mint: #00bfa5; / 薄荷綠 /
---c-train: #7e57c2; / 交通紫 */
-
---glass-bg: rgba(255, 255, 255, 0.7);
---shadow-soft: 0 10px 30px rgba(0, 131, 143, 0.08);
-}
-
-• { box-sizing: border-box; }
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
 body {
-font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
-background: linear-gradient(145deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
-background-attachment: fixed;
-color: var(--text-main);
-margin: 0; padding-top: 80px; padding-bottom: 100px;
-min-height: 100vh;
+font-family: 'Noto Sans TC', sans-serif;
+-webkit-tap-highlight-color: transparent;
+background-color: #fdfcf0;
 }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.smooth-scroll { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
 
-/* 頂部 Header */
-.header {
-position: fixed; top: 0; left: 0; width: 100%;
-background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px);
-z-index: 1000; text-align: center; padding: 15px 0;
-box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+@keyframes toastInOut {
+0% { transform: translate(-50%, 20px); opacity: 0; }
+15% { transform: translate(-50%, 0px); opacity: 1; }
+85% { transform: translate(-50%, 0px); opacity: 1; }
+100% { transform: translate(-50%, -20px); opacity: 0; }
 }
-.header h1 {
-margin: 0; font-size: 1.15rem; color: #00838f;
-font-weight: 800; letter-spacing: 1px;
-}
-
-/* 底部導航 Bar /
-.nav-bar {
-position: fixed; bottom: 0; left: 0; width: 100%;
-background: #ffffff;
-border-radius: 25px 25px 0 0;
-box-shadow: 0 -5px 25px rgba(0,0,0,0.06);
-z-index: 1000; display: flex; justify-content: space-around;
-padding: 12px 0 20px 0; / 預留底部安全區 */
-}
-.nav-item {
-color: #b0bec5; text-decoration: none; font-size: 0.7rem;
-display: flex; flex-direction: column; align-items: center; gap: 4px;
-transition: 0.3s; cursor: pointer; font-weight: bold; width: 20%;
-}
-.nav-item i { font-size: 1.4rem; transition: 0.3s; }
-.nav-item.active { color: var(--c-sky); transform: translateY(-3px); }
-
-/* 頁面容器 */
-.page { display: none; padding: 0 18px; max-width: 600px; margin: 0 auto; animation: fade 0.3s ease; }
-.page.active { display: block; }
-@keyframes fade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-
-/* 橫向膠囊行程選單 /
-.day-nav {
-display: flex; gap: 8px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 5px;
-scrollbar-width: none; / 隱藏滾動條 */
-}
-.day-nav::-webkit-scrollbar { display: none; }
-.day-tab {
-flex: 0 0 auto; min-width: 65px;
-background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.8);
-border-radius: 20px; padding: 10px 5px; text-align: center;
-color: var(--text-light); font-size: 0.85rem; font-weight: bold;
-cursor: pointer; transition: 0.2s;
-}
-.day-tab span { font-size: 0.7rem; display: block; font-weight: normal; margin-top: 2px; }
-.day-tab.active { background: #ffffff; color: var(--c-sky); box-shadow: 0 4px 12px rgba(3, 169, 244, 0.2); border-color: transparent; }
-
-.day-content { display: none; animation: fade 0.3s; }
-.day-content.active { display: block; }
-
-/* 現代感卡片 */
-.card {
-background: var(--glass-bg); border-radius: 20px; padding: 20px; margin-bottom: 15px;
-box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,0.9);
-}
-.card-title {
-color: #006064; font-size: 1.1rem; font-weight: 900; margin: 0 0 15px 0;
-display: flex; align-items: center; gap: 8px;
-}
-
-/* ================== 極簡行程列表 ================== */
-.timeline { display: flex; flex-direction: column; gap: 15px; }
-.time-row {
-display: flex; align-items: flex-start; gap: 12px;
-background: #fff; padding: 12px; border-radius: 16px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-.time-col {
-font-weight: 900; color: #455a64; font-size: 0.9rem;
-min-width: 45px; text-align: center; padding-top: 4px;
-}
-.info-col { flex: 1; }
-
-/* 彩色 Tag 系統 */
-.tag {
-display: inline-block; padding: 4px 10px; border-radius: 8px;
-font-size: 0.75rem; font-weight: bold; margin-bottom: 6px; color: #fff;
-}
-.t-flight { background: var(--c-sky); }
-.t-train { background: var(--c-train); }
-.t-fun { background: var(--c-sunflower); color: #455a64; }
-.t-zepp { background: linear-gradient(135deg, var(--c-zepp), #ff7043); }
-.t-hotel { background: var(--c-mint); color: #004d40; }
-
-.action-title { font-size: 1rem; font-weight: bold; margin-bottom: 3px; color: var(--text-main); }
-.action-sub { font-size: 0.8rem; color: var(--text-light); }
-
-/* 圓形小地圖按鈕 */
-.icon-btn {
-display: inline-flex; justify-content: center; align-items: center;
-width: 28px; height: 28px; background: #eceff1; color: var(--c-sky);
-border-radius: 50%; text-decoration: none; margin-left: 5px; transition: 0.2s;
-}
-.icon-btn:hover { background: var(--c-sky); color: #fff; }
-
-/* ================== 其他介面 ================== /
-/ 輸入框與分帳 */
-.input-row { display: flex; align-items: center; background: #fff; border-radius: 12px; padding: 10px 15px; margin-bottom: 12px; }
-.input-row span { width: 80px; font-weight: bold; color: var(--text-light); font-size: 0.9rem; }
-.input-row input, .input-row select { flex: 1; border: none; outline: none; font-size: 1rem; font-weight: bold; background: transparent; }
-.btn-submit { background: var(--c-sky); color: #fff; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 15px rgba(3, 169, 244, 0.3); }
-
-/* 天氣 */
-.weather-main { text-align: center; padding: 10px 0; }
-.temp-big { font-size: 4rem; font-weight: 900; color: var(--c-sky); line-height: 1; }
-.weather-list { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 12px 5px; font-size: 0.9rem; font-weight: bold; }
-.weather-list:last-child { border: none; }
+.toast-animate { animation: toastInOut 2.5s ease-in-out forwards; }
 </style>
 </head>
 <body>
+<div id="root"></div>
 
-<header class="header">
-<h1>🌻Osaka Summer Zepp Tour🎵</h1>
-</header>
+<script type="text/babel">
+const { useState, useEffect } = React;
 
-<nav class="nav-bar">
-<div class="nav-item active" onclick="nav('itinerary', this)"><i class="fa-solid fa-map-location-dot"></i>行程</div>
-<div class="nav-item" onclick="nav('info', this)"><i class="fa-solid fa-plane"></i>機票</div>
-<div class="nav-item" onclick="nav('weather', this)"><i class="fa-solid fa-cloud-sun"></i>天氣</div>
-<div class="nav-item" onclick="nav('currency', this)"><i class="fa-solid fa-yen-sign"></i>匯率</div>
-<div class="nav-item" onclick="nav('expenses', this)"><i class="fa-solid fa-wallet"></i>記帳</div>
-</nav>
+const App = () => {
+const [activeTab, setActiveTab] = useState('itinerary');
+const [activeDay, setActiveDay] = useState('1');
+const [hkdInput, setHkdInput] = useState('');
+const [jpyInput, setJpyInput] = useState('');
+const [toastMsg, setToastMsg] = useState('');
+const exchangeRate = 20;
 
-<!-- ================= 行程 ================= -->
-<div id="itinerary" class="page active">
-<div class="day-nav">
-<div class="day-tab active" onclick="tab('day1', this)">D1<span>7/9 四</span></div>
-<div class="day-tab" onclick="tab('day2', this)">D2<span>7/10 五</span></div>
-<div class="day-tab" onclick="tab('day3', this)">D3<span>7/11 六</span></div>
-<div class="day-tab" onclick="tab('day4', this)">🎤<span>7/12 日</span></div>
-<div class="day-tab" onclick="tab('day5', this)">D5<span>7/13 一</span></div>
-<div class="day-tab" onclick="tab('tips', this)">💡<span>攻略</span></div>
-</div>
+// 記帳狀態
+const [showModal, setShowModal] = useState(false);
+const [expenseType, setExpenseType] = useState('trans');
+const [expenseDesc, setExpenseDesc] = useState('');
+const [expenseCost, setExpenseCost] = useState('');
+const [paymentMethod, setPaymentMethod] = useState('ICOCA');
 
-<!-- Day 1 -->
-<div id="day1" class="day-content active">
-<div class="card">
-<div class="card-title">🏯 漫步大阪城 & 抵達</div>
-<div class="timeline">
-<div class="time-row">
-<div class="time-col">11:50</div>
-<div class="info-col">
-<span class="tag t-flight">🛬 抵達關西</span>
-<div class="action-title">UO850 降落 T1</div>
-<div class="action-sub">辦理入境、提取行李</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">13:30</div>
-<div class="info-col">
-<span class="tag t-train">🚄 交通</span>
-<div class="action-title">南海電鐵 Rapi:t</div>
-<div class="action-sub">直達難波 (38分鐘)</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">14:15</div>
-<div class="info-col">
-<span class="tag t-hotel">🏨 住宿</span>
-<div class="action-title">HOTEL AMANEK <a class="icon-btn" href="https://maps.app.goo.gl/3xX7V9Q6N8W6H9E58" target="_blank"><i class="fa-solid fa-location-arrow"></i></a></div>
-<div class="action-sub">辦理 Check-in、安頓行李</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">15:25</div>
-<div class="info-col">
-<span class="tag t-fun">🏯 觀光</span>
-<div class="action-title">大阪城公園散步</div>
-<div class="action-sub">天守閣打卡、JO-TERRACE 嘆 Cafe</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">18:30</div>
-<div class="info-col">
-<span class="tag t-fun">🍜 晚餐</span>
-<div class="action-title">道頓堀 / 心齋橋</div>
-<div class="action-sub">食大阪燒、拉麵、買藥妝補給</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+// 閃卡/大字報狀態 (已移除語音功能)
+const [fullscreenNote, setFullscreenNote] = useState(null);
 
-<!-- Day 2 -->
-<div id="day2" class="day-content">
-<div class="card">
-<div class="card-title">🎢 USJ 全日狂歡</div>
-<div class="timeline">
-<div class="time-row">
-<div class="time-col">07:45</div>
-<div class="info-col">
-<span class="tag t-train">🚄 交通</span>
-<div class="action-title">難波出發</div>
-<div class="action-sub">阪神轉 JR 往環球城站</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">08:15</div>
-<div class="info-col">
-<span class="tag t-fun">🎢 樂園</span>
-<div class="action-title">日本環球影城 <a class="icon-btn" href="https://maps.app.goo.gl/9yB2Z7X7v6Hq4GZcA" target="_blank"><i class="fa-solid fa-location-arrow"></i></a></div>
-<div class="action-sub">APP 搶 Mario 整理券！全日暢玩</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">20:00</div>
-<div class="info-col">
-<span class="tag t-train">🚄 返程</span>
-<div class="action-title">返回難波</div>
-<div class="action-sub">難波大餐補充體力</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+// 安全讀取 LocalStorage
+const [transportEx, setTransportEx] = useState(() => {
+try { return JSON.parse(localStorage.getItem('osaka_trans_safe')) || []; }
+catch(e) { return []; }
+});
+const [shoppingEx, setShoppingEx] = useState(() => {
+try { return JSON.parse(localStorage.getItem('osaka_shop_safe')) || []; }
+catch(e) { return []; }
+});
 
-<!-- Day 3 -->
-<div id="day3" class="day-content">
-<div class="card">
-<div class="card-title">🦌 奈良探鹿 & 落日飛車</div>
-<div class="timeline">
-<div class="time-row">
-<div class="time-col">09:30</div>
-<div class="info-col">
-<span class="tag t-train">🚄 交通</span>
-<div class="action-title">近鐵前往奈良</div>
-<div class="action-sub">近鐵難波直達近鐵奈良站</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">10:15</div>
-<div class="info-col">
-<span class="tag t-fun">🦌 觀光</span>
-<div class="action-title">奈良公園餵鹿</div>
-<div class="action-sub">巴士直達，中午食宇治抹茶 Cafe</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">16:55</div>
-<div class="info-col">
-<span class="tag t-train">🚠 交通</span>
-<div class="action-title">生駒纜車</div>
-<div class="action-sub">生駒站轉乘纜車上山</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">17:20</div>
-<div class="info-col">
-<span class="tag t-fun">🎡 觀光</span>
-<div class="action-title">生駒山上遊園地 <a class="icon-btn" href="https://maps.app.goo.gl/N9M9A9P6T5X9N4Lh6" target="_blank"><i class="fa-solid fa-location-arrow"></i></a></div>
-<div class="action-sub">直奔空中單車看夕陽！(日落19:13)</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">20:45</div>
-<div class="info-col">
-<span class="tag t-hotel">🏨 準備</span>
-<div class="action-title">返回難波</div>
-<div class="action-sub">食晚餐、回房徹底打包行李</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Day 4 (Zepp) -->
-<div id="day4" class="day-content">
-<div class="card" style="border: 2px solid var(--c-zepp);">
-<div class="card-title" style="color: var(--c-zepp);">🎤 Zepp 決戰日！</div>
-<div class="timeline">
-<div class="time-row">
-<div class="time-col">09:30</div>
-<div class="info-col">
-<span class="tag t-hotel">🏨 退房</span>
-<div class="action-title">難波 Check-out</div>
-<div class="action-sub">帶大行李出發往櫻島</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">10:40</div>
-<div class="info-col">
-<span class="tag t-hotel">🏨 寄存</span>
-<div class="action-title">LIBER HOTEL</div>
-<div class="action-sub">櫃檯寄存行李，步行去食 Lunch</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">14:00</div>
-<div class="info-col">
-<span class="tag t-zepp">🔥 LIVE</span>
-<div class="action-title">Zepp Osaka (日場) <a class="icon-btn" href="https://maps.app.goo.gl/qL9b7A6h7Bq4m6m89" target="_blank" style="color:var(--c-zepp);"><i class="fa-solid fa-location-arrow"></i></a></div>
-<div class="action-sub">盡情狂歡！</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">17:00</div>
-<div class="info-col">
-<span class="tag t-hotel">🔋 休息</span>
-<div class="action-title">黃金一小時</div>
-<div class="action-sub">回酒店 Check-in 躺平回血</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">18:00</div>
-<div class="info-col">
-<span class="tag t-zepp">🔥 LIVE</span>
-<div class="action-title">Zepp Osaka (夜場)</div>
-<div class="action-sub">最後衝刺！完場秒回酒店貼休足時間</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Day 5 -->
-<div id="day5" class="day-content">
-<div class="card">
-<div class="card-title">🛍️ 血拼與返港</div>
-<div class="timeline">
-<div class="time-row">
-<div class="time-col">09:30</div>
-<div class="info-col">
-<span class="tag t-hotel">🏨 退房</span>
-<div class="action-title">自然醒 Check-out</div>
-<div class="action-sub">大行李隨身前往臨空城</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">12:00</div>
-<div class="info-col">
-<span class="tag t-fun">🛍️ 購物</span>
-<div class="action-title">臨空城 Outlets</div>
-<div class="action-sub">寄存行李、Food Court 午餐、血拼</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">17:15</div>
-<div class="info-col">
-<span class="tag t-train">🚄 交通</span>
-<div class="action-title">前往機場</div>
-<div class="action-sub">取回行李，搭 5 分鐘電車入機場</div>
-</div>
-</div>
-<div class="time-row">
-<div class="time-col">18:40</div>
-<div class="info-col">
-<span class="tag t-flight">🛫 離境</span>
-<div class="action-title">UO850 登機</div>
-<div class="action-sub">免稅店最後衝刺，20:40 起飛返港</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 攻略 -->
-<div id="tips" class="day-content">
-<div class="card">
-<div class="card-title">💡 戰術指南</div>
-<div style="font-size:0.9rem; line-height:1.6; color:var(--text-light);">
-<p><b>🎢 USJ 秘訣</b><br>
-表定 09:00 開園，實則 <b>08:15</b> 偷跑！入園秒開 APP 搶 Mario 券。善用「單人騎士(Single Rider)」可省一半時間。</p>
-<p><b>🌄 生駒山溫差</b><br>
-山頂風大，日落後會涼，背包<b>必帶薄外套</b>。18:15 到達直接排空中單車。</p>
-<p><b>💦 防暑對策</b><br>
-大阪夏日酷熱，防曬傘、手持風扇、冰感濕紙巾必備。全天狂飲寶礦力！</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- ================= 機票與住宿 ================= -->
-<div id="info" class="page">
-<div class="card">
-<div class="card-title"><i class="fa-solid fa-plane-departure" style="color:var(--c-sky);"></i> HK Express UO850</div>
-<div style="font-weight:bold; font-size:0.95rem; line-height:1.8;">
-🛫 去程 (7/9)： 抵達 KIX 11:50<br>
-🛬 回程 (7/13)： KIX 20:40 ✈️ HKG 23:50
-</div>
-</div>
-
-<div class="card">
-<div class="card-title"><i class="fa-solid fa-bed" style="color:var(--c-mint);"></i> 難波 (首三晚)</div>
-<div style="font-size:0.9rem;">
-<b>HOTEL AMANEK Osaka Namba</b><br>
-<span style="color:#78909c;">大阪市浪速区日本橋3-8-21</span>
-<a href="https://maps.app.goo.gl/3xX7V9Q6N8W6H9E58" target="_blank" style="display:block; margin-top:8px; color:var(--c-sky); text-decoration:none; font-weight:bold;">📍 Google Map 導航</a>
-</div>
-</div>
-
-<div class="card" style="border: 1px solid var(--c-zepp);">
-<div class="card-title"><i class="fa-solid fa-bed" style="color:var(--c-zepp);"></i> 櫻島 (決戰晚)</div>
-<div style="font-size:0.9rem;">
-<b>LIBER HOTEL OSAKA</b><br>
-<span style="color:#78909c;">大阪市此花区桜島1丁目1-35 (Zepp 對面)</span>
-<a href="https://maps.app.goo.gl/4Q8Y7kX8X5n3H9z57" target="_blank" style="display:block; margin-top:8px; color:var(--c-sky); text-decoration:none; font-weight:bold;">📍 Google Map 導航</a>
-</div>
-</div>
-</div>
-
-<!-- ================= 天氣 ================= -->
-<div id="weather" class="page">
-<div class="card">
-<div class="card-title">📍 大阪即時</div>
-<div class="weather-main">
-<div class="temp-big" id="w-temp">--°</div>
-<div id="w-desc" style="font-weight:bold; color:var(--text-light); margin-top:5px;">載入中...</div>
-</div>
-</div>
-<div class="card">
-<div class="card-title">📅 未來一週</div>
-<div id="w-daily"></div>
-</div>
-</div>
-
-<!-- ================= 匯率 ================= -->
-<div id="currency" class="page">
-<div class="card">
-<div class="card-title">💱 快速換算</div>
-<div class="input-row">
-<span>匯率</span>
-<input type="number" id="rate" value="20.0" oninput="calc()">
-</div>
-<div class="input-row" style="background:#f1f8e9;">
-<span>港幣 HKD</span>
-<input type="number" id="hkd" placeholder="$`" oninput="calc('hkd')">
-</div>
-<div class="input-row" style="background:#e3f2fd; border: 2px solid var(--c-sky);">
-<span>日圓 JPY</span>
-<input type="number" id="jpy" placeholder="¥" oninput="calc('jpy')">
-</div>
-</div>
-</div>
-
-<!-- ================= 記帳 ================= -->
-<div id="expenses" class="page">
-<div class="card">
-<div class="card-title">💸 新增花費</div>
-<div class="input-row">
-<span>付款人</span>
-<select id="payer"><option value="O">🌟 O 付款</option><option value="K">💖 K 付款</option></select>
-</div>
-<div class="input-row">
-<span>項目</span>
-<input type="text" id="item" placeholder="例: 宵夜">
-</div>
-<div class="input-row">
-<span>金額 ¥</span>
-<input type="number" id="amt" placeholder="0">
-</div>
-<button class="btn-submit" onclick="addExp()">📝 記低佢</button>
-</div>
-
-<div class="card">
-<div class="card-title">📊 結算</div>
-<div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">
-<div>🌟 <span id="tot-o" style="color:var(--c-sky);">¥0</span></div>
-<div>💖 <span id="tot-k" style="color:var(--c-zepp);">¥0</span></div>
-</div>
-<div id="res" style="background:#fff3e0; color:#ef6c00; padding:10px; border-radius:10px; text-align:center; font-weight:bold; margin-bottom:15px;">無須結算</div>
-
-<div id="exp-list" style="font-size:0.9rem;"></div>
-</div>
-</div>
-
-<script>
-// == 頁面與 Tab 切換 ==
-function nav(id, el) {
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-el.classList.add('active');
-window.scrollTo(0, 0);
-if(id === 'weather' && !window.wLoaded) loadW();
-}
-function tab(id, el) {
-document.querySelectorAll('.day-content').forEach(d => d.classList.remove('active'));
-document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-el.classList.add('active');
-}
-
-// == 匯率 ==
-function calc(type) {
-const r = parseFloat(document.getElementById('rate').value)||0;
-const h = document.getElementById('hkd'), j = document.getElementById('jpy');
-if(type==='hkd') j.value = r ? Math.round((parseFloat(h.value)||0)*r) : '';
-else h.value = r ? ((parseFloat(j.value)||0)/r).toFixed(2) : '';
-}
-
-// == 記帳 ==
-let exps = [];
-try { exps = JSON.parse(localStorage.getItem('osaka_exp')) || []; } catch(e){}
-
-function renderExp() {
-let o=0, k=0, html='';
-exps.forEach((e, i) => {
-if(e.p==='O') o+=e.a; else k+=e.a;
-html += <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee;"&gt; &lt;span style="width:25px;"&gt;${e.p==='O'?'🌟':'💖'}</span>
-<span style="flex:1; color:#455a64;">{e.a}</span>
-<span style="color:#e53935; cursor:pointer; margin-left:10px;" onclick="delExp(latex
-{i})"&gt;&lt;i class="fa-solid fa-xmark"&gt;&lt;/i&gt;&lt;/span&gt; &lt;/div>`; }); document.getElementById('tot-o').innerText = `¥
-
-{o}; document.getElementById('tot-k').innerText =¥${k};
-document.getElementById('exp-list').innerHTML = html;
-
-let diff = Math.abs(o-k)/2;
-let res = document.getElementById('res');
-if(o>k) res.innerHTML = 💖 K 需要俾 🌟 O： ¥${diff}; else if(k&gt;o) res.innerHTML =🌟 O 需要俾 💖 K： ¥${diff};
-else res.innerHTML = 完美攤平！;
-}
-
-function addExp() {
-let p = document.getElementById('payer').value;
-let n = document.getElementById('item').value.trim();
-let a = parseInt(document.getElementById('amt').value);
-if(!n || !a) return alert('填寫完整呀！');
-exps.push({p, n, a});
-try { localStorage.setItem('osaka_exp', JSON.stringify(exps)); } catch(e){}
-renderExp();
-document.getElementById('item').value = '';
-document.getElementById('amt').value = '';
-}
-function delExp(i) {
-if(confirm('刪除呢筆？')) {
-exps.splice(i, 1);
-try { localStorage.setItem('osaka_exp', JSON.stringify(exps)); } catch(e){}
-renderExp();
-}
-}
-renderExp();
-
-// == 天氣 ==
-async function loadW() {
+// 儲存資料
+useEffect(() => {
 try {
-const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo');
-const d = await res.json();
-document.getElementById('w-temp').innerText = Math.round(d.current.temperature_2m) + '°';
-document.getElementById('w-desc').innerText = '即時氣溫';
+localStorage.setItem('osaka_trans_safe', JSON.stringify(transportEx));
+localStorage.setItem('osaka_shop_safe', JSON.stringify(shoppingEx));
+} catch(e) { console.error(e); }
+}, [transportEx, shoppingEx]);
 
-let html = '';
-const days = ['日','一','二','三','四','五','六'];
-for(let i=0; i<7; i++) {
-let date = new Date(d.daily.time[i]);
-let max = Math.round(d.daily.temperature_2m_max[i]);
-let min = Math.round(d.daily.temperature_2m_min[i]);
-html += <div class="weather-list"&gt; &lt;span style="width:40%; color:var(--text-light);"&gt;${date.getMonth()+1}/{i===0?'今日':days[date.getDay()]})</span>
-<span style="width:60%; text-align:right;">latex
-{min}° &lt;span style="color:#cfd8dc; margin:0 5px;"&gt;|&lt;/span&gt; &lt;span style="color:var(--text-main);"&gt;
+// 安全計算金額
+const totalTrans = transportEx.reduce((sum, item) => sum + (item.cost || 0), 0);
+const totalShop = shoppingEx.reduce((sum, item) => sum + (item.cost || 0), 0);
+const totalAll = totalTrans + totalShop;
 
-{max}°</span></span>
-</div>`;
+// 終極修復：最標準、100%相容的 Google Maps 連結
+const getGoogleMapUrl = (query) => https://maps.google.com/?q=${encodeURIComponent(query)}`;
+
+const convertHkdToJpy = (val) => {
+setHkdInput(val);
+if (val === '') setJpyInput('');
+else setJpyInput((parseFloat(val) * exchangeRate).toFixed(0));
+};
+
+const convertJpyToHkd = (val) => {
+setJpyInput(val);
+if (val === '') setHkdInput('');
+else setHkdInput((parseFloat(val) / exchangeRate).toFixed(2));
+};
+
+const showToast = (msg) => {
+setToastMsg(msg);
+setTimeout(() => setToastMsg(''), 2500);
+};
+
+const copyToClipboard = (text) => {
+const textArea = document.createElement("textarea");
+textArea.value = text;
+document.body.appendChild(textArea);
+textArea.select();
+try {
+document.execCommand('copy');
+showToast('✅ 成功複製地址！');
+} catch (err) {
+showToast('❌ 複製失敗');
 }
-document.getElementById('w-daily').innerHTML = html;
-window.wLoaded = true;
-} catch(e) { document.getElementById('w-desc').innerText = '無法載入'; }
+document.body.removeChild(textArea);
+};
+
+const openExpenseModal = (type) => {
+setExpenseType(type);
+setExpenseDesc('');
+setExpenseCost('');
+setPaymentMethod('ICOCA');
+setShowModal(true);
+};
+
+const saveExpense = () => {
+if (expenseDesc.trim() && expenseCost) {
+const newItem = { id: Date.now(), desc: expenseDesc, cost: parseInt(expenseCost), method: paymentMethod };
+if (expenseType === 'trans') setTransportEx([...transportEx, newItem]);
+else setShoppingEx([...shoppingEx, newItem]);
+setShowModal(false);
+showToast('💰 開支已記錄');
 }
+};
+
+const deleteExpense = (type, id) => {
+if (type === 'trans') setTransportEx(transportEx.filter(i => i.id !== id));
+else setShoppingEx(shoppingEx.filter(i => i.id !== id));
+showToast('🗑️ 已刪除記錄');
+};
+
+const getMethodBadge = (method) => {
+if (method === '現金') return <span className="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold">💵 現金</span>;
+if (method === '信用卡') return <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">💳 信用卡</span>;
+return <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">🪪 ICOCA</span>;
+};
+
+// ====== 🌻 5日4夜行程資料 ======
+const itinerary = {
+'1': {
+date: "7月9日 (四)", title: "抵達大阪 ＆ 悠閒漫步大阪城公園",
+items: [
+{ time: "11:50", desc: "🛬 航班 UO850 降落關西機場 (KIX) 第一航廈。" },
+{ time: "13:15", desc: "辦理入境、提領行李完成。" },
+{ time: "13:30", desc: "乘搭 南海電鐵特急 Rapi:t 直達「難波站」", taxi: "車程 38 分鐘", loc: "難波駅", note: "此日交通直接拍手機 IC 卡 (Suica / ICOCA) 即可。Rapi:t 車票建議提早網上預購。" },
+{ time: "14:15", desc: "前往難波酒店辦理 Check-in 並安頓行李。", note: "推薦住難波站/日本橋站附近。" },
+{ time: "15:00", desc: "乘搭地下鐵千日前線至「鶴橋站」，轉乘 JR 環狀線至「大阪城公園站」", taxi: "車程約 20 分鐘" },
+{ time: "15:25", desc: "🧋 避開正午烈日，漫步大阪城公園", loc: "大阪城天守閣", note: "此時散步最舒服。可在天守閣前打卡，隨後到 JO-TERRACE OSAKA 搵間 Cafe 坐下飲杯嘢放鬆。" },
+{ time: "17:45", desc: "原路乘搭 JR 與地下鐵返回難波。" },
+{ time: "18:30", desc: "🍜 晚餐：道頓堀/心齋橋享用大阪燒或拉麵", loc: "道頓堀", note: "飯後在藥妝店補給休足時間、寶礦力等防暑物資，提早休息。" }
+ ]
+},
+'2': {
+date: "7月10日 (五)", title: "環球影城 (USJ) 全日狂歡",
+items: [
+{ time: "07:00", desc: "起床並在酒店或便利店食早餐。" },
+{ time: "07:45", desc: "乘搭 阪神難波線 至「西九條站」，轉乘 JR 夢咲線 至「環球城站 (Universal-City)」", taxi: "車程約 30 分鐘" },
+{ time: "08:15", desc: "🎢 日本環球影城 全日暢玩", loc: "ユニバーサル・スタジオ・ジャパン", note: "官方寫 09:00 開門，但通常 08:15-08:30 就會提早放人。務必提早抵達！" },
+{ time: "08:30", desc: "📱 手機搶「Mario 整理券」", note: "雙腳踏入樂園那一秒，立刻打開 APP 搶超級任天堂世界整理券！建議選 10:30 之後場次。" },
+{ time: "12:00", desc: "⚡ Single Rider 續命大招", note: "不介意分開坐的話，走 Single Rider 通道（瑪利歐賽車、飛天翼龍等），排隊時間通常縮短一半以上！" },
+{ time: "14:00", desc: "☀️ 抗暑體力提示", note: "樂園內極度曝曬。請帶備防曬傘、手持風扇、冰感濕紙巾，全日多補充寶礦力，避免中暑。" },
+{ time: "20:00", desc: "原路乘搭 JR 與阪神電車返回難波酒店。" },
+{ time: "20:45", desc: "在難波食大餐補充體力。" }
+ ]
+},
+'3': {
+date: "7月11日 (六)", title: "奈良探鹿 ＆ 生駒山高空落日飛車",
+items: [
+{ time: "09:30", desc: "從近鐵大阪難波站 乘搭「近鐵奈良線」直達「近鐵奈良站」", taxi: "車程約 40 分鐘", note: "🎫 強烈建議預先買好【近鐵電車周遊券 1日券 (¥1,900)】，極度回本！" },
+{ time: "10:15", desc: "🦌 奈良公園 ＆ 東大寺探訪小鹿", loc: "奈良公園", note: "出站後直接乘搭奈良巴士直達公園門口。中午找一間精緻的抹茶 Cafe 坐下食午餐，放慢腳步。" },
+{ time: "16:30", desc: "乘搭近鐵至「生駒站」 (車程約 20 分鐘)。" },
+{ time: "16:55", desc: "步行至「鳥居前站」，換乘 生駒鋼索線（生駒纜車）", note: "中途在寶山寺站轉乘，直達生駒山上站。" },
+{ time: "17:20", desc: "🎡 生駒山上遊園地：高空落日飛車", loc: "生駒山上遊園地", note: "一上山直奔「空中單軌單車」排隊。當天日落約為 19:13，可以一邊踩單車看著夕陽沉入大阪平原，拍下最美的人生成片！" },
+{ time: "18:15", desc: "🧥 山頂氣溫提示", note: "山頂海拔較高，日落後配合山風，體感溫度會比市區低 3-4 度。務必帶一件薄外套防風著涼。" },
+{ time: "19:40", desc: "乘搭纜車下山，轉乘近鐵快速急行返回難波。" },
+{ time: "20:45", desc: "回到難波食晚餐，回酒店完全打包好大行李箱。" }
+ ]
+},
+'4': {
+date: "7月12日 (日)", title: "換酒店 ＆ Zepp 演唱會決戰日",
+items: [
+{ time: "09:30", desc: "難波酒店辦理 Check-out，帶同大行李出發。" },
+{ time: "10:00", desc: "難波站(阪神) ➡️ 西九條站(JR) ➡️ 櫻島站", taxi: "避開常規上下班時間", loc: "桜島駅", note: "大行李直接拉去櫻島酒店寄存是最舒服的做法。" },
+{ time: "10:40", desc: "櫻島站對面 LIBER HOTEL OSAKA 寄存大行李", loc: "リーベルホテル大阪" },
+{ time: "11:15", desc: "🍱 賽前補給：Universal CityWalk 午餐", loc: "ユニバーサル・シティウォーク大阪", note: "趁餐廳剛開門人較少趕緊食午餐，並在超商買好飯糰與運動飲料作為應援補給。" },
+{ time: "13:45", desc: "抵達 Zepp Osaka Bayside 會場", loc: "Zepp Osaka Bayside", note: "從櫻島酒店步行只需 3 分鐘。" },
+{ time: "14:00", desc: "🎤 【第一場演唱會】盡情享受！" },
+{ time: "17:00", desc: "🛌 黃金 1 小時・最大優勢觸發！", note: "完場後立刻回酒店Check in。把雙腿墊高休息，多喝溫水，為 18:00 的第二場大決戰做好100%充電！" },
+{ time: "18:00", desc: "🎤 精神飽滿地步行 3 分鐘回 Zepp，迎戰【第二場演唱會】。" },
+{ time: "21:15", desc: "直接回酒店房間秒睡休息", note: "用熱水沖淋雙腿或局部足浴，貼上休足時間秒睡。" }
+ ]
+},
+'5': {
+date: "7月13日 (一)", title: "臨空城 Outlets 大減價 🛫 飛返香港",
+items: [
+{ time: "09:30", desc: "睡到自然醒，酒店早餐，辦理 Check-out（大行李隨身）。" },
+{ time: "10:45", desc: "🚇 大行李最順暢移師法", taxi: "櫻島站 ➡️ 西九條站(同站轉乘 JR關空快速) ➡️ 直達臨空城站", note: "一條線坐到底，不用推行李在市區轉車。" },
+{ time: "11:45", desc: "將大行李寄存在車站的 Coin Locker 或 Outlets 寄存處。", loc: "りんくうタウン駅" },
+{ time: "12:00", desc: "🛍️ 臨空城 Outlets 夏季大減價瘋狂血拼！", loc: "りんくうプレミアム・アウトレット", note: "7 月中旬 Summer Sale 折扣瘋狂！中午在 Food Court 或沿海餐廳食午餐。" },
+{ time: "17:15", desc: "取回行李，乘搭電車(只需 1 站) 或巴士直達關西機場。", loc: "関西国際空港" },
+{ time: "18:40", desc: "辦理 HK Express UO689 的登機及行李託運", note: "隨後在免稅店做最後衝刺（買伴手禮/ Royce）。" },
+{ time: "20:40", desc: "🛫 航班起飛，告別大阪。" },
+{ time: "23:50", desc: "🛬 平安抵達香港，完美結束行程。" }
+ ]
+}
+};
+
+const placesData = [
+{ cat: "機場", koName: "関西国際空港 (KIX)", zhName: "關西國際機場", koAddr: "大阪府泉佐野市泉州空港北1" },
+{ cat: "樂園", koName: "ユニバーサル・スタジオ・ジャパン", zhName: "日本環球影城 USJ", koAddr: "大阪府大阪市此花区桜島2-1-33" },
+{ cat: "會場", koName: "Zepp Osaka Bayside", zhName: "Zepp 大阪音樂廳 Bayside", koAddr: "大阪府大阪市此花区桜島1-1-61" },
+{ cat: "酒店", koName: "リーベルホテル大阪", zhName: "LIBER HOTEL OSAKA", koAddr: "大阪府大阪市此花区桜島1-1-35" },
+{ cat: "景點", koName: "大阪城公園", zhName: "大阪城公園", koAddr: "大阪府大阪市中央区大阪城1-1" },
+{ cat: "景點", koName: "奈良公園", zhName: "奈良公園", koAddr: "奈良県奈良市雑司町" },
+{ cat: "遊樂場", koName: "生駒山上遊園地", zhName: "生駒山上遊園地", koAddr: "奈良県生駒市菜畑2312-1" },
+{ cat: "購物", koName: "りんくうプレミアム・アウトレット", zhName: "臨空城 Outlets", koAddr: "大阪府泉佐野市りんくう往來南3-28" }
+ ];
+
+const japanesePhrases = [
+{ t: "🧳 寄存行李", k: "荷物を預かっていただけますか？", d: "請問可以幫我寄放行李嗎？" },
+{ t: "🍽️ 餐廳用餐", k: "メニューをいただけますか？", d: "請問可以給我菜單嗎？" },
+{ t: "💰 購物結帳", k: "これはいくらですか？", d: "請問這個多少錢？" },
+{ t: "🛍️ 辦理退稅", k: "免税手続きはできますか？", d: "請問這裡可以辦理退稅嗎？" },
+{ t: "🚽 尋找設施", k: "トイレはどこですか？", d: "請問洗手間在哪裡？" },
+{ t: "📸 請求幫忙", k: "写真を撮っていただけますか？", d: "請問可以幫我們拍張照嗎？" }
+ ];
+
+return (
+<div className="min-h-screen text-[#1a2b4c] pb-[120px] relative overflow-x-hidden">
+
+{/* Toast 通知框 */}
+{toastMsg && (
+<div className="fixed z-[600] left-1/2 -translate-x-1/2 top-4 bg-[#1a2b4c]/90 backdrop-blur-md text-white px-6 py-3 rounded-full font-black text-sm shadow-xl toast-animate flex items-center gap-2">
+<i className="fa-solid fa-check text-[#fcd34d]"></i> {toastMsg}
+</div>
+)}
+
+{/* 頂部橫幅 */}
+<div className="relative h-44 bg-[#1a2b4c] flex flex-col items-center justify-center overflow-hidden z-10 shadow-md">
+<div className="z-10 text-center px-4">
+<h1 className="text-2xl font-black text-white tracking-[0.1em] drop-shadow-md">
+🌻 Osaka Summer Tour 🎵
+</h1>
+<p className="text-[#fcd34d] text-sm font-black tracking-[0.2em] mt-2 uppercase">Zepp 決戰隨身手冊</p>
+</div>
+</div>
+
+{/* 匯率換算器 */}
+<div className="px-4 -mt-6 relative z-20">
+<div className="bg-white rounded-2xl shadow-lg p-3.5 border border-gray-100">
+<div className="flex items-center gap-2">
+<div className="flex-1 bg-gray-50 rounded-xl p-2 border border-gray-100">
+<p className="text-[10px] font-black text-gray-400 mb-0.5 text-center">HKD 🇭🇰</p>
+<input type="number" value={hkdInput} onChange={(e) => convertHkdToJpy(e.target.value)} className="w-full text-center text-lg font-black text-[#1a2b4c] bg-transparent focus:outline-none" placeholder="0"/>
+</div>
+<div className="flex flex-col items-center justify-center px-1">
+<i className="fa-solid fa-right-left text-[10px] text-gray-300"></i>
+<span className="text-[8px] font-bold text-gray-400 mt-0.5">1:{exchangeRate}</span>
+</div>
+<div className="flex-1 bg-blue-50 rounded-xl p-2 border border-blue-100">
+<p className="text-[10px] font-black text-blue-400 mb-0.5 text-center">JPY 🇯 ঐতি</p>
+<input type="number" value={jpyInput} onChange={(e) => convertJpyToHkd(e.target.value)} className="w-full text-center text-lg font-black text-blue-600 bg-transparent focus:outline-none" placeholder="0"/>
+</div>
+</div>
+</div>
+</div>
+
+{/* 主功能橫向藥丸選單 */}
+<div className="mt-5 px-4 relative z-10">
+<div className="flex bg-white rounded-xl p-1.5 mb-5 border border-gray-200 shadow-sm overflow-x-auto no-scrollbar smooth-scroll gap-1.5">
+{[
+{ id: 'itinerary', name: '行程', icon: 'fa-calendar' },
+{ id: 'places', name: '地點', icon: 'fa-map-pin' },
+{ id: 'phrase', name: '大字報', icon: 'fa-language' },
+{ id: 'expense', name: '記帳', icon: 'fa-credit-card' }
+ ].map((tab) => (
+<button
+key={tab.id}
+onClick={() => setActiveTab(tab.id)}
+className={flex-shrink-0 min-w-[72px] px-3 py-3 text-sm font-black rounded-lg transition-all flex items-center justify-center gap-1.5${activeTab === tab.id ? 'bg-[#1a2b4c] text-white shadow-md' : 'text-gray-400 hover:text-gray-600'}} &gt; &lt;i className={fa-solid ${tab.icon}}></i> {tab.name}
+</button>
+))}
+</div>
+
+{/* ==================== 1. 行程分頁 ==================== */}
+{activeTab === 'itinerary' && (
+<div className="space-y-4">
+<div className="flex space-x-2 overflow-x-auto pb-2 no-scrollbar smooth-scroll relative z-20">
+{['1', '2', '3', '4', '5'].map(day => (
+<button
+key={day}
+onClick={(e) => { e.preventDefault(); setActiveDay(day); }}
+className={flex-shrink-0 w-16 py-2.5 rounded-xl text-sm font-black transition-all border-2${activeDay === day ? 'bg-[#fcd34d] border-[#fcd34d] text-[#1a2b4c] shadow-md' : 'bg-white border-gray-200 text-gray-400'}`}
+>
+Day {day}
+</button>
+))}
+</div>
+
+<div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+<div className="mb-5 border-l-4 border-[#fcd34d] pl-3">
+<p className="text-[11px] font-black text-gray-400 mb-1 uppercase">{(itinerary[activeDay] || itinerary['1']).date}</p>
+<h2 className="text-xl font-black text-[#1a2b4c] leading-tight">{(itinerary[activeDay] || itinerary['1']).title}</h2>
+</div>
+
+<div className="space-y-7 relative">
+<div className="absolute left-[1.1rem] top-2 bottom-2 w-[2px] bg-gray-100"></div>
+
+{(itinerary[activeDay] || itinerary['1']).items.map((item, idx) => (
+<div key={idx} className="relative pl-12 group">
+<div className="absolute left-0 top-0 w-10 h-10 bg-[#1a2b4c] text-white rounded-xl flex flex-col items-center justify-center z-10 shadow-md">
+<span className="text-[12px] font-black leading-none">{item.time.split(':')[0]}</span>
+<span className="text-[12px] font-black leading-none">{item.time.split(':')[1] || '00'}</span>
+</div>
+
+<div className="flex flex-col pt-0.5">
+{item.loc ? (
+<a
+href={getGoogleMapUrl(item.loc)}
+target="_blank"
+rel="noopener noreferrer"
+className="text-[16px] font-black leading-snug tracking-tight text-blue-700 hover:text-blue-900 underline decoration-blue-200 underline-offset-4 flex items-center flex-wrap"
+>
+{item.desc}
+<i className="fa-solid fa-map-pin text-[12px] ml-1.5 text-blue-400"></i>
+</a>
+) : (
+<span className="text-[16px] font-black leading-snug tracking-tight text-[#1a2b4c]">
+{item.desc}
+</span>
+)}
+
+{item.note && (
+<p className="text-[12px] text-amber-700 font-bold mt-1.5 flex items-start leading-relaxed">
+<span className="text-amber-400 mr-1 shrink-0">✨</span>{item.note}
+</p>
+)}
+
+{item.taxi && (
+<div className="mt-2.5 flex items-center gap-1.5 text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 w-fit">
+<i className="fa-solid fa-location-arrow shrink-0"></i> {item.taxi}
+</div>
+)}
+</div>
+</div>
+))}
+</div>
+</div>
+</div>
+)}
+
+{/* ==================== 2. 地點地址 ==================== */}
+{activeTab === 'places' && (
+<div className="space-y-4">
+<div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100 flex items-start gap-2 mb-2">
+<i className="fa-solid fa-map text-emerald-600 mt-0.5"></i>
+<p className="text-xs text-emerald-800 font-bold leading-relaxed">
+行程中所有重要打卡地點。<br/>點擊右側複製按鈕可直接獲取日文地址，方便貼上地圖搜尋！
+</p>
+</div>
+{placesData.map((place, idx) => (
+<div key={idx} className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm">
+<p className="text-xs font-black text-[#1a2b4c] mb-3 border-b border-gray-100 pb-2 flex items-center gap-1.5">
+<span className="w-1.5 h-1.5 bg-[#fcd34d] rounded-full"></span>
+{place.cat}
+</p>
+<div className="space-y-1">
+<p className="text-base font-black text-[#1a2b4c]">
+{place.koName} <span className="text-sm text-gray-500 font-bold ml-1">({place.zhName})</span>
+</p>
+<div className="flex items-start gap-2 mt-2 pt-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
+<div className="flex-1 overflow-hidden">
+<p className="text-sm font-black text-gray-800 mb-0.5 select-all truncate">{place.koAddr}</p>
+</div>
+<button onClick={() => copyToClipboard(place.koAddr)} className="p-2.5 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-gray-100 active:scale-90 transition-all shrink-0">
+<i className="fa-solid fa-copy text-[#1a2b4c]"></i>
+</button>
+</div>
+</div>
+</div>
+))}
+</div>
+)}
+
+{/* ==================== 3. 實用大字報閃卡 (取代語音) ==================== */}
+{activeTab === 'phrase' && (
+<div className="space-y-4">
+<div className="bg-amber-50 p-4 rounded-xl border border-amber-100 flex items-start gap-2 mb-2">
+<i className="fa-solid fa-chalkboard-user text-amber-600 mt-0.5"></i>
+<p className="text-xs text-amber-800 font-bold leading-relaxed">
+日本溝通不求人！點擊卡片任何位置，即可彈出全螢幕「日文大字報」，直接展示給日本店員或司機看。
+</p>
+</div>
+{japanesePhrases.map((note, idx) => (
+<div key={idx} onClick={() => setFullscreenNote(note)} className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm active:scale-95 transition-transform cursor-pointer relative">
+<p className="text-[11px] font-black text-gray-400 mb-2 tracking-widest">{note.t}</p>
+<div className="bg-[#1a2b4c] p-4 rounded-xl mb-3 shadow-inner">
+<p className="text-lg font-bold text-white text-center">"{note.k}"</p>
+</div>
+<div className="flex justify-between items-center mt-2">
+<p className="text-[13px] text-blue-800 font-bold">{note.d}</p>
+<i className="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+))}
+</div>
+)}
+
+{/* ==================== 4. 記帳功能 ==================== */}
+{activeTab === 'expense' && (
+<div className="space-y-5">
+<div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+<div className="flex justify-between items-center mb-5">
+<h3 className="text-lg font-black text-[#1a2b4c] flex items-center gap-2"><i className="fa-solid fa-train-subway text-blue-500"></i> 交通車資</h3>
+<button onClick={() => openExpenseModal('trans')} className="bg-[#1a2b4c] text-white p-2.5 rounded-xl shadow-md active:scale-95 transition-transform"><i className="fa-solid fa-plus w-5 h-5 flex items-center justify-center"></i></button>
+</div>
+<div className="space-y-3">
+{transportEx.length === 0 && <p className="text-center text-gray-400 text-xs py-2">尚無紀錄</p>}
+{transportEx.map(item => (
+<div key={item.id} className="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+<div className="flex flex-col">
+<span className="text-[15px] font-bold text-gray-700">{item.desc}</span>
+<span className="mt-1.5">{getMethodBadge(item.method)}</span>
+</div>
+<div className="flex items-center gap-3">
+<span className="text-base font-black text-blue-600">￥{item.cost.toLocaleString()}</span>
+<button onClick={() => deleteExpense('trans', item.id)} className="text-red-400 p-1.5"><i className="fa-solid fa-trash-can"></i></button>
+</div>
+</div>
+))}
+</div>
+</div>
+
+<div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+<div className="flex justify-between items-center mb-5">
+<h3 className="text-lg font-black text-[#1a2b4c] flex items-center gap-2"><i className="fa-solid fa-bag-shopping text-pink-500"></i> 購物美食</h3>
+<button onClick={() => openExpenseModal('shop')} className="bg-pink-600 text-white p-2.5 rounded-xl shadow-md active:scale-95 transition-transform"><i className="fa-solid fa-plus w-5 h-5 flex items-center justify-center"></i></button>
+</div>
+<div className="space-y-3">
+{shoppingEx.length === 0 && <p className="text-center text-gray-400 text-xs py-2">尚無紀錄</p>}
+{shoppingEx.map(item => (
+<div key={item.id} className="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+<div className="flex flex-col">
+<span className="text-[15px] font-bold text-gray-700">{item.desc}</span>
+<span className="mt-1.5">{getMethodBadge(item.method)}</span>
+</div>
+<div className="flex items-center gap-3">
+<span className="text-base font-black text-pink-600">￥{item.cost.toLocaleString()}</span>
+<button onClick={() => deleteExpense('shop', item.id)} className="text-red-400 p-1.5"><i className="fa-solid fa-trash-can"></i></button>
+</div>
+</div>
+))}
+</div>
+</div>
+</div>
+)}
+</div>
+
+{/* 底部固定導航與結算 */}
+<div className="fixed bottom-0 left-0 right-0 z-[100] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+<div className="bg-[#1a2b4c] px-5 py-2 flex justify-between items-center border-t border-[#1a2b4c]">
+<div className="flex items-center gap-2">
+<span className="text-[10px] font-black text-white/60 uppercase tracking-widest">Total</span>
+<span className="text-base font-black text-white tracking-tight">￥{totalAll.toLocaleString()}</span>
+</div>
+<div className="flex items-baseline gap-2">
+<span className="text-[10px] font-black text-[#fcd34d]/80 uppercase tracking-widest">HKD</span>
+<span className="text-base font-black text-[#fcd34d] tracking-tight">$`{(totalAll/exchangeRate).toFixed(0)}</span>
+</div>
+</div>
+</div>
+
+{/* 記帳彈窗 Modal */}
+{showModal && (
+<div className="fixed inset-0 bg-[#1a2b4c]/80 backdrop-blur-sm z-[400] flex items-center justify-center p-5">
+<div className="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-in zoom-in duration-200">
+<h3 className="text-xl font-black text-[#1a2b4c] mb-6">
+{expenseType === 'trans' ? '🚇 新增交通支出' : '🛍️ 新增購物美食'}
+</h3>
+<div className="space-y-4">
+<div>
+<label className="text-xs font-black text-gray-400 uppercase mb-2 block">項目名稱</label>
+<input type="text" value={expenseDesc} onChange={e => setExpenseDesc(e.target.value)} placeholder="輸入項目..." className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-base font-bold text-gray-800 focus:outline-none focus:border-[#1a2b4c]" />
+</div>
+<div>
+<label className="text-xs font-black text-gray-400 uppercase mb-2 block">金額 (JPY)</label>
+<input type="number" value={expenseCost} onChange={e => setExpenseCost(e.target.value)} placeholder="0" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-xl font-black text-[#1a2b4c] focus:outline-none focus:border-[#1a2b4c]" />
+</div>
+<div>
+<label className="text-xs font-black text-gray-400 uppercase mb-2 block">付款方式</label>
+<div className="flex gap-2">
+{['現金', '信用卡', 'ICOCA'].map(method => (
+<button
+key={method}
+onClick={() => setPaymentMethod(method)}
+className={flex-1 py-2.5 rounded-xl text-xs font-black border transition-colors${paymentMethod === method ? 'bg-blue-50 border-blue-400 text-blue-700' : 'bg-white border-gray-200 text-gray-400'}} &gt; {method} &lt;/button&gt; ))} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div className="flex gap-3 mt-8"&gt; &lt;button onClick={() =&gt; setShowModal(false)} className="flex-1 py-3.5 bg-gray-100 text-gray-600 rounded-xl font-black text-sm"&gt;取消&lt;/button&gt; &lt;button onClick={saveExpense} className={flex-1 py-3.5 text-white rounded-xl font-black text-sm ${expenseType === 'trans' ? 'bg-[#1a2b4c]' : 'bg-pink-600'}`}>儲存紀錄</button>
+</div>
+</div>
+</div>
+)}
+
+{/* 全螢幕大字報 (取代語音) */}
+{fullscreenNote && (
+<div className="fixed inset-0 bg-[#1a2b4c] z-[500] flex flex-col items-center justify-center p-8" onClick={() => setFullscreenNote(null)}>
+<button className="absolute top-8 right-8 p-4 text-white/50 z-20"><i className="fa-solid fa-xmark text-3xl"></i></button>
+<div className="w-full text-center space-y-10 z-10">
+<p className="text-[#fcd34d] text-lg font-black tracking-widest uppercase"><i className="fa-solid fa-eye"></i> 請展示給對方看</p>
+<div className="bg-white/10 rounded-3xl p-10 border border-white/20 backdrop-blur-md shadow-2xl">
+<p className="text-4xl font-black text-white leading-snug break-words">{fullscreenNote.k}</p>
+</div>
+<p className="text-gray-300 text-xl font-bold">{fullscreenNote.d}</p>
+<p className="text-white/30 text-sm mt-10">點擊畫面任何地方關閉</p>
+</div>
+</div>
+)}
+</div>
+);
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
 </script>
 </body>
 </html>
