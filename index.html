@@ -7,7 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+• { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body {
 font-family: 'Noto Sans TC', system-ui, sans-serif;
 background-color: #f6f3eb;
@@ -190,15 +190,12 @@ gap: 10px;
 </head>
 <body>
 
-<!-- Toast 提示組件 -->
 <div id="toast" class="toast">✅ 已成功複製！</div>
 
-<!-- 網頁標頭 -->
 <div class="header">
 <h1>🌻Osaka Summer Zepp Tour🎵</h1>
 </div>
 
-<!-- 貨幣換算器 -->
 <div class="calc-container">
 <div class="calc-box">
 <div class="calc-block">
@@ -213,7 +210,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- 頂部高亮切換標籤 -->
 <div class="main-tabs">
 <button class="tab-btn active" data-tab="itinerary">📅 詳細行程</button>
 <button class="tab-btn" data-tab="weather">☀️ 實時天氣</button>
@@ -223,7 +219,6 @@ gap: 10px;
 <button class="tab-btn" data-tab="info">ℹ️ 實用資訊</button>
 </div>
 
-<!-- ==================== 📅 行程分頁 ==================== -->
 <div id="sec-itinerary" class="content-section">
 <div class="day-tabs">
 <button class="day-btn active" data-day="1">Day 1</button>
@@ -234,7 +229,6 @@ gap: 10px;
 </div>
 
 <div class="card">
-<!-- Day 1 -->
 <div id="day-content-1" class="day-content">
 <div class="card-title-box">
 <p class="card-date">07/09 (四)</p>
@@ -252,7 +246,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- Day 2 -->
 <div id="day-content-2" class="day-content hidden">
 <div class="card-title-box">
 <p class="card-date">07/10 (五)</p>
@@ -270,7 +263,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- Day 3 -->
 <div id="day-content-3" class="day-content hidden">
 <div class="card-title-box">
 <p class="card-date">07/11 (六)</p>
@@ -288,7 +280,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- Day 4 -->
 <div id="day-content-4" class="day-content hidden">
 <div class="card-title-box">
 <p class="card-date">07/12 (日)</p>
@@ -299,7 +290,7 @@ gap: 10px;
 <div class="timeline-item"><div class="time-badge"><span>10</span><span>00</span></div><div class="time-desc">乘搭阪神轉 JR 至「櫻島站」</div></div>
 <div class="timeline-item"><div class="time-badge"><span>10</span><span>40</span></div><div class="time-desc"><a href="https://www.google.com/maps/search/?api=1&query=リーベルホテル大阪" target="_blank">LIBER HOTEL OSAKA 寄存大行李 📍</a></div><p class="time-note">⭐️ 酒店位於櫻島站正對面</p></div>
 <div class="timeline-item"><div class="time-badge"><span>11</span><span>15</span></div><div class="time-desc">午餐：Universal CityWalk</div></div>
-<div class="timeline-item"><div class="time-badge"><span>13</span><span>45</span></div><div class="time-desc"><a href="https://www.google.com/maps/search/?api=1&query=Zepp Osaka Bayside" target="_blank">抵達 Zepp Osaka Bayside 📍</a></div><p class="time-note">⭐️ 從櫻島酒店步行約 3 分鐘</p></div>
+<div class="timeline-item"><div class="time-badge"><span>13</span><span>45</span></div><div class="time-desc"><a href="https://www.google.com/maps/search/?api=1&query=Zepp" target="_blank">抵達 Zepp Osaka Bayside 📍</a></div><p class="time-note">⭐️ 從櫻島酒店步行約 3 分鐘</p></div>
 <div class="timeline-item"><div class="time-badge"><span>14</span><span>00</span></div><div class="time-desc">🎵【第一場演唱會】熱血開唱！</div></div>
 <div class="timeline-item"><div class="time-badge"><span>17</span><span>00</span></div><div class="time-desc">完場回酒店 Check-in｜黃金 1 小時回房休息</div></div>
 <div class="timeline-item"><div class="time-badge"><span>18</span><span>00</span></div><div class="time-desc">🎵【第二場演唱會】｜迎戰夜場！</div></div>
@@ -307,7 +298,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- Day 5 -->
 <div id="day-content-5" class="day-content hidden">
 <div class="card-title-box">
 <p class="card-date">07/13 (一)</p>
@@ -327,7 +317,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- ==================== ☀️ 天氣分頁 (獨立出來) ==================== -->
 <div id="sec-weather" class="content-section hidden">
 <div class="weather-section">
 <div class="weather-title-box">
@@ -349,7 +338,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- ==================== 📍 地點分頁 ==================== -->
 <div id="sec-places" class="content-section hidden">
 <div class="place-item">
 <p class="place-cat">🏨 難波住宿大本營</p>
@@ -417,7 +405,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- ==================== 📒 記帳分帳分頁 ==================== -->
 <div id="sec-expense" class="content-section hidden">
 <div class="summary-card">
 <div class="summary-title">旅程公費總支出</div>
@@ -444,7 +431,6 @@ gap: 10px;
 <div id="expense-list-container"></div>
 </div>
 
-<!-- ==================== 🗣️ 實用日語分頁 ==================== -->
 <div id="sec-phrase" class="content-section hidden">
 <div style="background:#feFAE0; border:1px dashed #f3c68f; padding:12px; border-radius:12px; font-size:12px; color:#78350f; margin-bottom:15px;">
 🗣️ 點擊【喇叭】播音；點擊【整張卡片】放大成大字報給日本店員看！
@@ -452,7 +438,6 @@ gap: 10px;
 <div id="phrase-list-container"></div>
 </div>
 
-<!-- ==================== ℹ️ 實用資訊分頁 (新增) ==================== -->
 <div id="sec-info" class="content-section hidden">
 <div class="info-card">
 <div class="info-title">🚨 日本當地緊急求助</div>
@@ -475,7 +460,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- 底部固定導覽按鈕列 (6個完美排列) -->
 <div class="bottom-nav">
 <button class="nav-btn active" data-tab="itinerary"><span class="nav-icon">📅</span><span class="nav-text">行程</span></button>
 <button class="nav-btn" data-tab="weather"><span class="nav-icon">☀️</span><span class="nav-text">天氣</span></button>
@@ -485,7 +469,6 @@ gap: 10px;
 <button class="nav-btn" data-tab="info"><span class="nav-icon">ℹ️</span><span class="nav-text">資訊</span></button>
 </div>
 
-<!-- 新增帳目彈窗 (Modal) -->
 <div id="expense-modal" class="modal-overlay hidden">
 <div class="modal-box">
 <div class="modal-header">
@@ -505,7 +488,6 @@ gap: 10px;
 </div>
 </div>
 
-<!-- 全螢幕大字報 Overlay -->
 <div id="fullscreen-overlay" class="fullscreen-overlay hidden">
 <button class="fs-close" id="close-fs-btn">❌</button>
 <div class="fs-card"><p class="fs-text" id="fs-japanese">テキスト</p></div>
@@ -518,7 +500,7 @@ let modalSelectedPayer = 'O';
 let expenses = [];
 
 try {
-const saved = localStorage.getItem('osaka_expenses_pure_v3');
+const saved = localStorage.getItem('osaka_expenses_pure_v4');
 if (saved) expenses = JSON.parse(saved);
 } catch(e) { console.error(e); }
 
@@ -531,16 +513,25 @@ const phrasesData = [
 { t: "🛍️ 購物退稅", k: "免税（タックスフリー）はできますか？", d: "請問這裡可以退稅嗎？" },
 { t: "🚽 尋找設施", k: "トイレはどこですか？", d: "請問洗手間在哪裡？" },
 { t: "📸 請求幫忙", k: "写真を撮ってもらえませんか？", d: "請問可以幫我們拍張照嗎？" }
- ];
+];
 
-window.onload = function() {
+function initAll() {
 initNavigation();
 initCurrencyConverter();
 initExpenses();
 renderPhrases();
 fetchWeatherData();
-document.getElementById('refresh-weather-btn').addEventListener('click', fetchWeatherData);
-};
+const refreshBtn = document.getElementById('refresh-weather-btn');
+if (refreshBtn) {
+refreshBtn.addEventListener('click', fetchWeatherData);
+}
+}
+
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', initAll);
+} else {
+initAll();
+}
 
 // 導覽控制 (支援6大分頁)
 function initNavigation() {
@@ -554,9 +545,11 @@ const targetTab = btn.getAttribute('data-tab');
 if (!targetTab) return;
 
 sections.forEach(sec => {
-document.getElementById('sec-' + sec).classList.add('hidden');
+const secEl = document.getElementById('sec-' + sec);
+if (secEl) secEl.classList.add('hidden');
 });
-document.getElementById('sec-' + targetTab).classList.remove('hidden');
+const targetEl = document.getElementById('sec-' + targetTab);
+if (targetEl) targetEl.classList.remove('hidden');
 
 allTabButtons.forEach(b => {
 if (b.getAttribute('data-tab') === targetTab) {
@@ -575,9 +568,12 @@ btn.addEventListener('click', function() {
 const selectedDay = btn.getAttribute('data-day');
 if (!selectedDay) return;
 for (let i = 1; i <= 5; i++) {
-document.getElementById('day-content-' + i).classList.add('hidden');
+const dayContent = document.getElementById('day-content-' + i);
+if (dayContent) dayContent.classList.add('hidden');
 }
-document.getElementById('day-content-' + selectedDay).classList.remove('hidden');
+const targetDayContent = document.getElementById('day-content-' + selectedDay);
+if (targetDayContent) targetDayContent.classList.remove('hidden');
+
 dayButtons.forEach(b => {
 if (b.getAttribute('data-day') === selectedDay) b.classList.add('active');
 else b.classList.remove('active');
@@ -589,21 +585,26 @@ else b.classList.remove('active');
 function initCurrencyConverter() {
 const hkdInput = document.getElementById('hkdInput');
 const jpyInput = document.getElementById('jpyInput');
+
+if (hkdInput && jpyInput) {
 hkdInput.addEventListener('input', function() {
-const hkdVal = hkdInput.value.trim();
+const hkdVal = hkdInput.value;
 if (hkdVal === '' || isNaN(hkdVal)) { jpyInput.value = ''; return; }
 jpyInput.value = Math.round(parseFloat(hkdVal) * 20);
 });
 jpyInput.addEventListener('input', function() {
-const jpyVal = jpyInput.value.trim();
+const jpyVal = jpyInput.value;
 if (jpyVal === '' || isNaN(jpyVal)) { hkdInput.value = ''; return; }
 hkdInput.value = (parseFloat(jpyVal) / 20).toFixed(2);
 });
+}
 }
 
 async function fetchWeatherData() {
 const hourlyContainer = document.getElementById('hourly-weather-container');
 const dailyContainer = document.getElementById('daily-weather-container');
+if (!hourlyContainer || !dailyContainer) return;
+
 hourlyContainer.innerHTML = '<div class="weather-loading">🔄 正在即時連線日本氣象廳...</div>';
 dailyContainer.innerHTML = '<div class="weather-loading">🔄 載入中...</div>';
 
@@ -663,9 +664,11 @@ const text = btn.getAttribute('data-copy');
 const el = document.createElement('textarea');
 el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
 const toast = document.getElementById('toast');
+if (toast) {
 toast.innerText = "✅ 已成功複製日文地址！";
 toast.classList.add('show');
 setTimeout(() => toast.classList.remove('show'), 2000);
+}
 });
 });
 
@@ -681,23 +684,39 @@ window.speechSynthesis.speak(utterance);
 
 function initExpenses() {
 renderExpenses();
-document.getElementById('add-expense-btn').addEventListener('click', () => {
-document.getElementById('expense-modal').classList.remove('hidden');
-document.getElementById('in-desc').value = ''; document.getElementById('in-cost').value = '';
+
+const addBtn = document.getElementById('add-expense-btn');
+const closeBtn = document.getElementById('close-modal-btn');
+const pbtnO = document.getElementById('pbtn-O');
+const pbtnK = document.getElementById('pbtn-K');
+const submitBtn = document.getElementById('submit-expense-btn');
+
+if (addBtn) addBtn.addEventListener('click', () => {
+const modal = document.getElementById('expense-modal');
+if (modal) modal.classList.remove('hidden');
+document.getElementById('in-desc').value = '';
+document.getElementById('in-cost').value = '';
 switchModalPayer('O');
 });
-document.getElementById('close-modal-btn').addEventListener('click', () => { document.getElementById('expense-modal').classList.add('hidden'); });
-document.getElementById('pbtn-O').addEventListener('click', () => switchModalPayer('O'));
-document.getElementById('pbtn-K').addEventListener('click', () => switchModalPayer('K'));
-document.getElementById('submit-expense-btn').addEventListener('click', submitExpenseItem);
+if (closeBtn) closeBtn.addEventListener('click', () => {
+const modal = document.getElementById('expense-modal');
+if (modal) modal.classList.add('hidden');
+});
+if (pbtnO) pbtnO.addEventListener('click', () => switchModalPayer('O'));
+if (pbtnK) pbtnK.addEventListener('click', () => switchModalPayer('K'));
+if (submitBtn) submitBtn.addEventListener('click', submitExpenseItem);
 }
 
 function switchModalPayer(payer) {
 modalSelectedPayer = payer;
+const pbtnO = document.getElementById('pbtn-O');
+const pbtnK = document.getElementById('pbtn-K');
 if (payer === 'O') {
-document.getElementById('pbtn-O').classList.add('active'); document.getElementById('pbtn-K').classList.remove('active');
+if (pbtnO) pbtnO.classList.add('active');
+if (pbtnK) pbtnK.classList.remove('active');
 } else {
-document.getElementById('pbtn-K').classList.add('active'); document.getElementById('pbtn-O').classList.remove('active');
+if (pbtnK) pbtnK.classList.add('active');
+if (pbtnO) pbtnO.classList.remove('active');
 }
 }
 
@@ -706,56 +725,94 @@ const desc = document.getElementById('in-desc').value.trim();
 const cost = parseInt(document.getElementById('in-cost').value);
 if (!desc || isNaN(cost) || cost <= 0) { alert("請完整輸入項目名稱及大於0的金額！"); return; }
 expenses.push({ id: Date.now(), desc: desc, cost: cost, payer: modalSelectedPayer });
-localStorage.setItem('osaka_expenses_pure_v3', JSON.stringify(expenses));
+localStorage.setItem('osaka_expenses_pure_v4', JSON.stringify(expenses));
 renderExpenses();
-document.getElementById('expense-modal').classList.add('hidden');
+const modal = document.getElementById('expense-modal');
+if (modal) modal.classList.add('hidden');
 }
 
 window.deleteExpense = function(id) {
 if (confirm("確定要刪除呢筆帳目？")) {
 expenses = expenses.filter(i => i.id !== id);
-localStorage.setItem('osaka_expenses_pure_v3', JSON.stringify(expenses));
+localStorage.setItem('osaka_expenses_pure_v4', JSON.stringify(expenses));
 renderExpenses();
 }
 };
 
 function renderExpenses() {
 const container = document.getElementById('expense-list-container');
-container.innerHTML = ''; let totalO = 0, totalK = 0;
+if (!container) return;
+container.innerHTML = '';
+let totalO = 0, totalK = 0;
+
 expenses.forEach(item => {
 if (item.payer === 'O') totalO += item.cost;
 if (item.payer === 'K') totalK += item.cost;
 const div = document.createElement('div');
 div.className = 'expense-item';
-div.innerHTML = &lt;div class="expense-info"&gt;&lt;span class="expense-desc"&gt;${item.desc}</span><span class="badge {item.payer === 'O' ? '🌟 O 先付' : '💖 K 先付'}</span></div>
-<div class="expense-cost"><span>¥{item.id})">❌</button></div>
-; container.appendChild(div); }); const totalAll = totalO + totalK; document.getElementById('exp-total-all').innerText =¥{totalO.toLocaleString()}; document.getElementById('exp-total-k').innerText =¥{Math.round(half - totalK).toLocaleString()}</div>; else if (totalK &gt; totalO) settleEl.innerHTML =🌟 O 需要比返 💖 K<div class="settle-result">¥${Math.round(half - totalO).toLocaleString()}&lt;/div>;
-else settleEl.innerHTML = <span style="color:#10b981;"&gt;🎉 帳目完美平分，互不相欠！&lt;/span>;
+div.innerHTML = &lt;div class="expense-info"&gt; &lt;span class="expense-desc"&gt;${item.desc}</span>
+<span class="badge {item.payer === 'O' ? '🌟 O 先付' : '💖 K 先付'}</span>
+</div>
+<div class="expense-cost">
+<span>¥{item.id})">❌</button>
+</div>
+`;
+container.appendChild(div);
+});
+
+const totalAll = totalO + totalK;
+document.getElementById('exp-total-all').innerText = ¥${totalAll.toLocaleString()}; document.getElementById('exp-total-o').innerText =¥${totalO.toLocaleString()};
+document.getElementById('exp-total-k').innerText = ¥${totalK.toLocaleString()}`;
+
+const half = totalAll / 2;
+const settleEl = document.getElementById('settle-msg');
+if (settleEl) {
+if (totalAll === 0) {
+settleEl.innerText = "尚未有消費紀錄";
+} else if (totalO > totalK) {
+settleEl.innerHTML = 💖 K 需要比返 🌟 O &lt;div class="settle-result"&gt;¥${Math.round(half - totalK).toLocaleString()}</div>; } else if (totalK &gt; totalO) { settleEl.innerHTML =🌟 O 需要比返 💖 K <div class="settle-result">¥${Math.round(half - totalO).toLocaleString()}&lt;/div>;
+} else {
+settleEl.innerHTML = <span style="color:#10b981;"&gt;🎉 帳目完美平分，互不相欠！&lt;/span>;
+}
+}
 }
 
 function renderPhrases() {
 const container = document.getElementById('phrase-list-container');
+if (!container) return;
 container.innerHTML = '';
+
 phrasesData.forEach(item => {
 const div = document.createElement('div');
 div.className = 'phrase-item';
 div.addEventListener('click', () => {
 document.getElementById('fs-japanese').innerText = item.k;
 document.getElementById('fs-chinese').innerText = "中文意思：" + item.d;
-document.getElementById('fullscreen-overlay').classList.remove('hidden');
+const overlay = document.getElementById('fullscreen-overlay');
+if (overlay) overlay.classList.remove('hidden');
 const speakBtn = document.getElementById('fs-speak-btn');
-const newBtn = speakBtn.cloneNode(true); speakBtn.parentNode.replaceChild(newBtn, speakBtn);
+if (speakBtn) {
+const newBtn = speakBtn.cloneNode(true);
+speakBtn.parentNode.replaceChild(newBtn, speakBtn);
 newBtn.addEventListener('click', (e) => playVoice(item.k, e));
+}
 });
 div.innerHTML = &lt;p style="font-size:10px; font-weight:bold; color:rgba(61,90,128,0.4); margin:0 0 6px 0;"&gt;${item.t}</p>
-<div class="phrase-jp-box"><p class="phrase-jp">"{item.d}</p>
+<div class="phrase-jp-box">
+<p class="phrase-jp">{item.d}</p>
 `;
-div.querySelector('.voice-btn').addEventListener('click', (e) => playVoice(item.k, e));
+const voiceBtn = div.querySelector('.voice-btn');
+if (voiceBtn) voiceBtn.addEventListener('click', (e) => playVoice(item.k, e));
 container.appendChild(div);
 });
-document.getElementById('close-fs-btn').addEventListener('click', () => { document.getElementById('fullscreen-overlay').classList.add('hidden'); });
-document.getElementById('fullscreen-overlay').addEventListener('click', () => { document.getElementById('fullscreen-overlay').classList.add('hidden'); });
-document.querySelector('.fs-card').addEventListener('click', (e) => e.stopPropagation());
+
+const closeFsBtn = document.getElementById('close-fs-btn');
+const fsOverlay = document.getElementById('fullscreen-overlay');
+const fsCard = document.querySelector('.fs-card');
+
+if (closeFsBtn) closeFsBtn.addEventListener('click', () => { if (fsOverlay) fsOverlay.classList.add('hidden'); });
+if (fsOverlay) fsOverlay.addEventListener('click', () => { fsOverlay.classList.add('hidden'); });
+if (fsCard) fsCard.addEventListener('click', (e) => e.stopPropagation());
 }
 </script>
 </body>
