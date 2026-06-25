@@ -49,11 +49,11 @@ animation: floatDeco 4s ease-in-out infinite alternate;
 100% { transform: translateY(-8px) rotate(8deg); }
 }
 
-/* ================= 1. 雙向貨幣換算器 ================= */
+/* ================= 1. 雙向貨幣換算器 (更新版) ================= */
 .calc-container { padding: 0 20px; margin-top: -20px; position: relative; z-index: 10; }
 .calc-box {
 background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); border-radius: 16px;
-padding: 15px 15px 28px 15px; 
+padding: 15px 15px 28px 15px; /* 加大底部 padding 容納匯率設定 */
 border: 1px dashed #eed7c5; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 display: flex; align-items: center; gap: 10px; position: relative;
 }
@@ -62,10 +62,11 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .calc-label { font-size: 10px; font-weight: bold; color: #b45309; margin-bottom: 3px; }
 .calc-block.jpy .calc-label { color: #0369a1; }
 .calc-input { width: 100%; text-align: center; font-size: 18px; font-weight: 900; color: #3d5a80; background: transparent; border: none; outline: none; }
+/* 自訂匯率框 */
 .rate-config { position: absolute; bottom: 6px; right: 15px; font-size: 10px; font-weight: bold; color: rgba(61,90,128,0.5); display: flex; align-items: center; gap: 4px; }
 .rate-input { width: 45px; background: rgba(255,255,255,0.5); border: 1px solid rgba(61,90,128,0.2); border-radius: 4px; font-size: 10px; padding: 2px 4px; color: #3d5a80; text-align: center; font-weight: bold; outline: none; }
 
-/* ================= 天氣看板樣式 ================= */
+/* ================= 天氣看板樣式 (還原夏日風 + 增加預警) ================= */
 .weather-section { background: rgba(255,255,255,0.95); border-radius: 20px; padding: 15px; border: 1px dashed rgba(61,90,128,0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
 .weather-title-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .weather-title-box h3 { font-size: 14px; margin: 0; color: #2a4365; font-weight: 900; }
@@ -74,7 +75,7 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .hourly-weather-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
 .hourly-weather-scroll::-webkit-scrollbar { height: 5px; }
 .hourly-weather-scroll::-webkit-scrollbar-thumb { background: rgba(61,90,128,0.15); border-radius: 3px; }
-.hourly-item { flex-shrink: 0; width: 70px; background: #fdfaf6; border: 1px solid #eed7c5; border-radius: 10px; padding: 8px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.hourly-item { flex-shrink: 0; width: 70px; background: #fdfaf6; border: 1px solid #eed7c5; border-radius: 10px; padding: 8px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: all 0.3s; }
 .hourly-time { font-size: 9px; color: rgba(61,90,128,0.6); font-weight: bold; white-space: nowrap; }
 .hourly-icon { font-size: 18px; }
 .hourly-temp { font-size: 13px; font-weight: 900; color: #2a4365; }
@@ -86,8 +87,20 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .daily-icon { font-size: 16px; }
 .daily-temp { font-size: 9px; font-weight: bold; color: #2a4365; white-space: nowrap; }
 .weather-loading { width: 100%; text-align: center; font-size: 12px; color: rgba(61,90,128,0.5); padding: 15px 0; font-weight: bold; }
+/* 防災橫幅 */
 .disaster-btn { display: block; width: 100%; background: #fff1f2; border: 1px dashed #fda4af; color: #e11d48; text-align: center; padding: 10px; border-radius: 12px; font-size: 12px; font-weight: 900; text-decoration: none; margin-bottom: 12px; }
 .weather-alert { background: #fee2e2; border: 1px solid #ef4444; color: #b91c1c; border-radius: 10px; padding: 10px; font-size: 12px; font-weight: bold; margin-bottom: 15px; text-align: center; display: none; }
+
+/* 🚀 攻略 Tips 專用樣式 */
+.tips-block { margin-bottom: 22px; }
+.tips-block-title { font-size: 14px; color: #0369a1; font-weight: 900; margin: 0 0 10px 0; padding-bottom: 6px; border-bottom: 1px dashed rgba(2,132,199,0.2); display: flex; align-items: center; gap: 4px; }
+.tips-highlight-red { font-size: 12px; font-weight: bold; color: #e11d48; background: #fff1f2; padding: 8px 12px; border-radius: 10px; border: 1px dashed #fda4af; margin-bottom: 12px; line-height: 1.5; }
+.tips-sub-header { font-size: 12px; font-weight: 900; color: #2a4365; margin: 12px 0 6px 0; }
+.tips-ul, .tips-ol { padding-left: 18px; margin: 0 0 12px 0; font-size: 12.5px; color: #3d5a80; line-height: 1.6; }
+.tips-ul li, .tips-ol li { margin-bottom: 6px; }
+.tips-ul li strong, .tips-ol li strong { color: #1e3a8a; }
+.tips-box-blue { background: #f0f9ff; border: 1px dashed #bae6fd; padding: 10px 12px; border-radius: 10px; font-size: 12px; color: #0369a1; line-height: 1.5; margin-bottom: 12px; }
+.tips-box-pink { background: #fdf2f8; border: 1px dashed #fbcfe8; padding: 10px 12px; border-radius: 10px; font-size: 12px; color: #9d174d; line-height: 1.5; margin-bottom: 12px; }
 
 /* 頂部導覽 Tab */
 .main-tabs { display: flex; gap: 6px; padding: 15px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
@@ -135,7 +148,7 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .info-value { font-size: 13px; font-weight: 900; color: #1e3a8a; }
 .info-value a { color: #0284c7; text-decoration: none; }
 
-/* ================= 記帳分帳樣式 ================= */
+/* ================= 記帳分帳樣式 (已升級) ================= */
 .summary-card { text-align: center; background: white; border-radius: 20px; padding: 20px; border: 1px dashed rgba(61,90,128,0.2); margin-bottom: 15px; position: relative; overflow: hidden; }
 .summary-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(to right, #38bdf8, #f472b6); }
 .summary-title { font-size: 11px; font-weight: bold; color: rgba(61,90,128,0.5); letter-spacing: 1px; margin: 5px 0 2px 0; }
@@ -188,7 +201,7 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .form-input { width: 100%; border: 1px dashed #eed7c5; padding: 8px; border-radius: 8px; background: white; outline: none; font-size: 13px; }
 .payer-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
 .select-btn { padding: 8px 0; border-radius: 8px; border: 1px solid #eed7c5; background: white; font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; color: #9ca3af; }
-.select-btn.active { background: #e0f2fe; border-color: #38bdf8; color: #0369a1; }
+.select-btn.active { background: #e0f2fe; border-color: #38bdf8; color: #0369a1; } /* 共用選中樣式 */
 .submit-btn { width: 100%; background: #f3c68f; border: 1px dashed #d97706; padding: 10px; font-size: 13px; font-weight: 900; color: #2a4365; border-radius: 12px; cursor: pointer; margin-top: 10px; }
 
 /* 底部固定導覽列 */
@@ -235,6 +248,7 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 
 <div class="main-tabs">
 <button class="tab-btn active" data-tab="itinerary">📅 詳細行程</button>
+<button class="tab-btn" data-tab="tips">💡 攻略 Tips</button>
 <button class="tab-btn" data-tab="weather">☀️ 實時天氣</button>
 <button class="tab-btn" data-tab="places">📍 重要地點</button>
 <button class="tab-btn" data-tab="expense">📒 記帳分帳</button>
@@ -340,6 +354,63 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 </div>
 </div>
 
+<div id="sec-tips" class="content-section hidden">
+<div class="card">
+<div class="card-title-box">
+<p class="card-date">USJ & 生駒山 & 演唱會</p>
+<h2 class="card-title">🗺️ 行程神攻略與實用 Tips</h2>
+</div>
+
+<div class="tips-block">
+<h3 class="tips-block-title">1️⃣ 環球影城 (USJ) 完全作戰 ＆ 搶整理券攻略</h3>
+<div class="tips-highlight-red">7 月正值暑假，加上天氣炎熱，請務必開啟「高效率模式」：</div>
+<ul class="tips-ul">
+<li><strong>提早入園（潛規則）：</strong>官方寫 09:00 開門，但通常 08:15-08:30 就會提早放人入園。請務必在 08:15 前抵達門口排隊。</li>
+</ul>
+
+<div class="tips-sub-header">📱 出發前必做準備：</div>
+<ul class="tips-ul">
+<li>下載官方 <strong>「USJ APP」</strong>。</li>
+<li>將你和旅伴的實體門票 QR Code 提前掃描輸入到同一個 APP 內（綁定在一起，等一下才能一起搶同一個時段的整理券）。</li>
+</ul>
+
+<div class="tips-sub-header">🎯 手機搶「區域入場保證券 (整理券)」核心步驟：</div>
+<ol class="tips-ol">
+<li>當你步行通過樂園閘口、工作人員嗶完你的門票、你雙腳踏入樂園的那一秒鐘，請立刻打開 APP。</li>
+<li>點選 「區域入場保證券/整理券」 → 「E進場券」 → 「選擇超級任天堂世界 (Mario)」。</li>
+<li>勾選你和旅伴的門票，選擇你想要的入場時間段（建議選 10:30-11:30 之後，這樣一開園你可以先去衝其他不用整理券的熱門項目）。</li>
+<li>截圖保存搶到的 QR Code。（註：哈利波特園區現在通常不用整理券，除非人潮極度爆滿）</li>
+</ol>
+
+<div class="tips-sub-header">⚡ 不買 Express（快速通關）的續命大招：「Single Rider (單人騎士)」</div>
+<div class="tips-box-blue">
+如果你們不介意分開坐（玩設施時不坐隔壁，但排隊是一起排），可以走 Single Rider 通道（適用於瑪利歐賽車、飛天翼龍、荷里活美夢乘車遊）。排隊時間通常會比一般通道縮短一半以上！
+</div>
+
+<div class="tips-sub-header">🎒 抗暑防 M 到物資：</div>
+<div class="tips-box-pink">
+樂園內極度曝曬。請帶備防曬傘、手持風扇、冰感濕紙巾。如果正值生理期，入園前先食一粒 EVE 止痛藥，並在園內多補充運動飲料（寶礦力），避免中暑及體力透支。
+</div>
+</div>
+
+<div class="tips-block">
+<h3 class="tips-block-title">2️⃣ 生駒山落日飛車 Tips</h3>
+<ul class="tips-ul">
+<li><strong>山頂氣溫較低：</strong>生駒山頂海拔較高，黃昏日落後配合山風，體感溫度會比難波市區低 3-4 度。M 到期間身體容易沾寒沾凍，當天背包裡一定要帶一件薄外套或披肩。</li>
+<li><strong>搶位時間：</strong>18:15 抵達山上後，請直接跟著人群去排「空中單軌單車」，此時通常需要排隊 20-30 分鐘，排到時剛好能迎來 19:00 左右最美的魔幻晚霞。</li>
+</ul>
+</div>
+
+<div class="tips-block" style="margin-bottom:0;">
+<h3 class="tips-block-title">3️⃣ 12號演唱會當天行李與體力 Tips</h3>
+<ul class="tips-ul">
+<li><strong>大行李安排：</strong>12號早上從難波去櫻島時，因為是順著電車方向，只要避開常規上下班時間（我們排 10:00 出發），電車上通常不會太擠，大行李直接拉去櫻島酒店寄存是最方便、成本最低的做法。</li>
+<li><strong>體力充電：</strong>17:00 完場回到 LIBER HOTEL 時，記得把雙腿墊高休息，多喝溫水，為 18:00 的第二場大決戰做好100%的充電！</li>
+</ul>
+</div>
+</div>
+</div>
+
 <div id="sec-weather" class="content-section hidden">
 <a href="https://www.jma.go.jp/bosai/map.html#5/34.5/137/&elem=all&contents=warning&lang=cn_zt" target="_blank" class="disaster-btn">
 🚨 日本氣象廳防災資訊 (地震/海嘯/颱風) 點擊查詢
@@ -351,7 +422,7 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <h3>☀️ 大阪實時天氣連線</h3>
 <button class="refresh-weather-btn" id="refresh-weather-btn">🔄 刷新天氣</button>
 </div>
-<div class="weather-sub-title">📱 3日動態每小時預報 (👈左右拉動 | 藍色代表建議帶遮 ☂️)</div>
+<div class="weather-sub-title">📱 3日動態每小時預報 (👈已自動過濾過往時間 | 藍色代表建議帶遮 ☂️)</div>
 <div class="hourly-weather-scroll" id="hourly-weather-container">
 <div class="weather-loading">正在獲取大阪氣象數據...</div>
 </div>
@@ -382,11 +453,11 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <div class="payer-grid">
 <div class="payer-box k">
 <div style="color:#be185d;">💖 K 已付</div>
-<div class="payer-amount" id="exp-total-k">¥0<br><span style="font-size:11px; color:#9d174d;">+$0</span></div> 
-<button class="add-btn-specific" onclick="openExpenseModal('K')">➕ K 記帳</button> 
-</div> 
-<div class="payer-box o"> 
-<div style="color:#0369a1;">🌟 O 已付</div> 
+<div class="payer-amount" id="exp-total-k">¥0<br><span style="font-size:11px; color:#9d174d;">+$0</span></div>
+<button class="add-btn-specific" onclick="openExpenseModal('K')">➕ K 記帳</button>
+</div>
+<div class="payer-box o">
+<div style="color:#0369a1;">🌟 O 已付</div>
 <div class="payer-amount" id="exp-total-o">¥0<br><span style="font-size:11px; color:#075985;">+$0</span></div>
 <button class="add-btn-specific" onclick="openExpenseModal('O')">➕ O 記帳</button>
 </div>
@@ -403,7 +474,6 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <div id="expense-list-container"></div>
 </div>
 
-<!-- 加強版 實用日語區塊 -->
 <div id="sec-phrase" class="content-section hidden">
 <div style="background:#feFAE0; border:1px dashed #f3c68f; padding:12px; border-radius:12px; font-size:12px; color:#78350f; margin-bottom:15px;">
 🗣️ 點擊【喇叭】播音；點擊【整張卡片】放大成大字報給日本店員看！
@@ -411,41 +481,33 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <div id="phrase-list-container"></div>
 </div>
 
-<!-- 加強版 實用資訊區塊 -->
 <div id="sec-info" class="content-section hidden">
 <div class="info-card">
 <div class="info-title">🚨 日本當地緊急求助</div>
 <div class="info-row"><span class="info-label">警察局 (報案/失竊)</span><span class="info-value"><a href="tel:110">110</a></span></div>
 <div class="info-row"><span class="info-label">消防局 / 救護車 (急病)</span><span class="info-value"><a href="tel:119">119</a></span></div>
-<div class="info-row"><span class="info-label">外國人生命線 (英文/中文)</span><span class="info-value"><a href="tel:0570000911">0570-000-911</a></span></div>
-<div class="info-row"><span class="info-label">日本國家旅遊局(JNTO)</span><span class="info-value"><a href="tel:05038162787">050-3816-2787</a></span></div>
+<div class="info-row"><span class="info-label">外國人生命線 (英文/中文)</span><span class="info-value">0570-000-911</span></div>
 </div>
 <div class="info-card" style="border-color: #a2d2ff;">
 <div class="info-title" style="color: #0369a1;">🇭🇰 香港官方境外求助</div>
 <div class="info-row"><span class="info-label">香港入境處求助熱線</span><span class="info-value"><a href="tel:+8521868">+852 1868</a></span></div>
 <div class="info-row"><span class="info-label">入境處 App 網絡電話</span><span class="info-value">支援 (免漫遊費)</span></div>
-<div class="info-row"><span class="info-label">中國駐大阪總領事館</span><span class="info-value"><a href="tel:0664459481">06-6445-9481</a></span></div>
-</div>
-<div class="info-card" style="border-color: #f3c68f;">
-<div class="info-title" style="color: #d97706;">🚇 交通與實用連結</div>
-<div class="info-row"><span class="info-label">乘換案內 (交通查詢)</span><span class="info-value"><a href="https://www.jorudan.co.jp/" target="_blank">Jorudan</a></span></div>
-<div class="info-row"><span class="info-label">USJ 官方 App 下載</span><span class="info-value"><a href="https://www.usj.co.jp/web/ja/jp/enjoy/app" target="_blank">點擊前往</a></span></div>
 </div>
 <div class="info-card" style="border-color: #eed7c5;">
 <div class="info-title" style="color: #b45309;">📦 隨身保險與重要資料</div>
 <div class="info-row"><span class="info-label">海外旅遊保險單號</span><span class="info-value">可以在此自行填寫備忘</span></div>
-<div class="info-row"><span class="info-label">AMANEK 酒店電話</span><span class="info-value"><a href="tel:+81667328190">+81-6-6732-8190</a></span></div>
-<div class="info-row"><span class="info-label">護照遺失處理流程</span><span class="info-value"><a href="https://www.immd.gov.hk/hkt/services/travel_document/Assistance_Outside_HK.html" target="_blank">點擊查看</a></span></div>
+<div class="info-row"><span class="info-label">AMANEK 酒店電話</span><span class="info-value">+81-6-6732-8190</span></div>
 </div>
 </div>
 
 <div class="bottom-nav">
 <button class="nav-btn active" data-tab="itinerary"><span class="nav-icon">📅</span><span class="nav-text">行程</span></button>
+<button class="nav-btn" data-tab="tips"><span class="nav-icon">💡</span><span class="nav-text">攻略</span></button>
 <button class="nav-btn" data-tab="weather"><span class="nav-icon">☀️</span><span class="nav-text">天氣</span></button>
 <button class="nav-btn" data-tab="places"><span class="nav-icon">📍</span><span class="nav-text">地點</span></button>
 <button class="nav-btn" data-tab="expense"><span class="nav-icon">📒</span><span class="nav-text">分帳</span></button>
 <button class="nav-btn" data-tab="phrase"><span class="nav-icon">🗣️</span><span class="nav-text">日語</span></button>
-<button class="nav-btn" data-tab="info"><span class="nav-icon">ℹ️</span><span class="nav-text">資訊</span></button>
+<button class="nav-btn" data-tab="info"><span class="nav-icon">ℹ</span><span class="nav-text">資訊</span></button>
 </div>
 
 <div id="expense-modal" class="modal-overlay hidden">
@@ -479,26 +541,15 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 let modalSelectedPayer = 'O';
 let modalSelectedCurrency = 'JPY';
 let expenses = [];
-
-// 【加強版】擴充實用日語庫
 const phrasesData = [
-{ t: "👋 基本問候", k: "すみません", d: "不好意思 / 請問" },
-{ t: "👋 基本問候", k: "ありがとうございます", d: "非常感謝" },
 { t: "🧳 住宿與行李", k: "荷物を預かってもらえますか？", d: "請問可以幫我寄存行李嗎？" },
-{ t: "🧳 住宿與行李", k: "チェックインをお願いします", d: "我要辦理入住" },
-{ t: "🚇 交通", k: "この電車は難波に行きますか？", d: "請問這班車有到難波嗎？" },
-{ t: "🚇 交通", k: "〇〇駅はどこですか？", d: "請問〇〇站在哪裡？" },
-{ t: "🍽️ 餐廳用餐", k: "メニューをお願いします。", d: "請問可以給我菜單嗎？" },
-{ t: "🍽️ 餐廳用餐", k: "お会計をお願いします。", d: "麻煩結帳。" },
 { t: "☕ 點餐", k: "アイスコーヒーを一つください。", d: "請給我一杯冰美式咖啡。" },
+{ t: "🍽️ 餐廳用餐", k: "メニューをお願いします。", d: "請問可以給我菜單嗎？" },
 { t: "🌶️ 口味調整", k: "辛さ控えめでお願いします。", d: "請幫我做微辣 (不要太辣)。" },
 { t: "💰 購物結帳", k: "これはいくらですか？", d: "請問這個多少錢？" },
 { t: "🛍️ 購物退稅", k: "免税（タックスフリー）はできますか？", d: "請問這裡可以退稅嗎？" },
-{ t: "💳 支付方式", k: "クレジットカードは使えますか？", d: "可以使用信用卡嗎？" },
 { t: "🚽 尋找設施", k: "トイレはどこですか？", d: "請問洗手間在哪裡？" },
-{ t: "📸 請求幫忙", k: "写真を撮ってもらえませんか？", d: "請問可以幫我們拍張照嗎？" },
-{ t: "🚨 緊急求助", k: "助けてください！", d: "請幫幫我！" },
-{ t: "🚨 緊急求助", k: "病院はどこですか？", d: "請問醫院在哪裡？" }
+{ t: "📸 請求幫忙", k: "写真を撮ってもらえませんか？", d: "請問可以幫我們拍張照嗎？" }
 ];
 
 function initApp() {
@@ -632,7 +683,7 @@ window.speechSynthesis.speak(utterance);
 } else { alert("目前裝置不支援日語朗讀。"); }
 }
 
-// 完美夏日天氣 + 惡劣預警
+// 完美夏日天氣 + 惡劣預警 (更新：已過去的時間可以自己消失 ＆ 高亮「現在」卡片)
 async function fetchWeatherData() {
 const hourlyContainer = document.getElementById('hourly-weather-container');
 const dailyContainer = document.getElementById('daily-weather-container');
@@ -656,18 +707,41 @@ alertBox.style.display = 'none';
 
 hourlyContainer.innerHTML = '';
 const hourly = data.hourly;
-for (let i = 0; i < 72; i++) {
+
+// 取得當前時間點（往前減45分鐘以保證當前小時不會漏掉）
+const timeThreshold = new Date().getTime() - 45 * 60 * 1000;
+let displayedHoursCount = 0;
+
+for (let i = 0; i < hourly.time.length; i++) {
 const dateObj = new Date(hourly.time[i]);
-const formattedTime = `${dateObj.getMonth() + 1}/${String(dateObj.getHours()).padStart(2, '0')}:00`;
+
+// 1) 已過去的時間直接 skip 跳過
+if (dateObj.getTime() < timeThreshold) continue;
+// 2) 最多連續顯示未來的 72 個小時（維持 3 日動態每小時預報）
+if (displayedHoursCount >= 72) break;
+
+let formattedTime = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:00`;
 const temp = Math.round(hourly.temperature_2m[i]);
 const pop = hourly.precipitation_probability[i];
 const icon = parseWeatherIcon(hourly.weather_code[i]);
 
 const div = document.createElement('div');
 div.className = 'hourly-item';
-if (pop >= 40) { div.style.background = '#e0f2fe'; div.style.borderColor = '#7dd3fc'; }
-div.innerHTML = `<span class="hourly-time">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
+
+// 🌟 參考 Google 天氣設計：為第一個即「現在」的時間塊做專屬清新風格高亮
+if (displayedHoursCount === 0) {
+formattedTime = "現在";
+div.style.border = '2px solid #0284c7';
+div.style.background = '#e0f2fe';
+div.style.boxShadow = '0 2px 8px rgba(2, 132, 199, 0.15)';
+} else if (pop >= 40) { 
+div.style.background = '#e0f2fe'; 
+div.style.borderColor = '#7dd3fc'; 
+}
+
+div.innerHTML = `<span class="hourly-time" style="${displayedHoursCount === 0 ? 'color:#0284c7; font-weight:900;' : ''}">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
 hourlyContainer.appendChild(div);
+displayedHoursCount++;
 }
 
 dailyContainer.innerHTML = '';
@@ -701,16 +775,13 @@ return '☁️';
 function renderPhrases() {
 const container = document.getElementById('phrase-list-container');
 if (!container) return;
-container.innerHTML = phrasesData.map(item => `
-<div class="phrase-item" data-jp="${item.k}" data-zh="${item.d}">
-  <p class="place-cat">${item.t}</p>
-  <div class="phrase-jp-box">
-    <p class="phrase-jp">${item.k}</p>
-    <button class="voice-btn" data-text="${item.k}">🔊</button>
-  </div>
-  <p class="phrase-zh">💡 中文：${item.d}</p>
+container.innerHTML = phrasesData.map(item => `<div class="phrase-item" data-jp="${item.k}" data-zh="${item.d}">
+<p class="place-cat">${item.t}</p>
+<div class="phrase-jp-box">
+<p class="phrase-jp">${item.k}</p>
+<button class="voice-btn" data-text="${item.k}">🔊</button>
 </div>
-`).join('');
+<p class="phrase-zh">💡 中文：${item.d}</p> </div>`).join('');
 }
 
 // 記帳系統邏輯 (終極混合計算版)
@@ -795,17 +866,16 @@ const payerClass = item.payer === 'O' ? 'o' : 'k';
 
 const div = document.createElement('div');
 div.className = 'expense-item';
-div.innerHTML = `
-<div class="expense-info">
-  <span class="expense-desc">${item.desc}</span>
-  <div style="display:flex; gap:4px; margin-top:2px;">
-    <span class="badge ${payerClass}">${payerText}</span>
-    <span class="badge ${isHKD ? 'hkd' : ''}">${isHKD ? 'HKD' : 'JPY'}</span>
-  </div>
+div.innerHTML = `<div class="expense-info"> 
+<span class="expense-desc">${item.desc}</span>
+<div style="display:flex; gap:4px; margin-top:2px;">
+<span class="badge ${payerClass}">${payerText}</span>
+${isHKD ? '<span class="badge hkd">HKD</span>' : ''}
+</div>
 </div>
 <div class="expense-cost">
-  ${sym}${item.cost.toLocaleString()}
-  <button class="del-btn" onclick="deleteExpense(${item.id})">❌</button>
+<span>${sym}${item.cost.toLocaleString()}</span>
+<button class="del-btn" onclick="deleteExpense(${item.id})">❌</button>
 </div>`;
 container.appendChild(div);
 });
@@ -831,13 +901,13 @@ settleEl.innerText = "尚未有消費紀錄";
 } else if (o_total_in_hkd > k_total_in_hkd) {
 // O 比得多，K 畀返 O
 const owe = Math.round(half_hkd - k_total_in_hkd);
-settleEl.innerHTML = `💖 K 畀返 🌟 O <br><div class="settle-result">$${owe.toLocaleString()}</div>`; 
+settleEl.innerHTML = `💖 K 👉🏻 🌟 O <br><div class="settle-result">$${owe.toLocaleString()}</div>`; 
 } else if (k_total_in_hkd > o_total_in_hkd) { 
-// K 比得多，O 畀返 K 
-const owe = Math.round(half_hkd - o_total_in_hkd); 
-settleEl.innerHTML = `🌟 O 畀返 💖 K <br><div class="settle-result">$${owe.toLocaleString()}</div>`;
-} else {
-settleEl.innerHTML = `<span style="color:#10b981;">🎉 完美平手，唔使夾錢！</span>`;
+// K 比得多，O 畀返 K
+const owe = Math.round(half_hkd - o_total_in_hkd);
+settleEl.innerHTML = `🌟 O 👉🏻 💖 K <br><div class="settle-result">$${owe.toLocaleString()}</div>`; 
+} else { 
+settleEl.innerHTML = `<span style="color:#10b981;">🎉 DONE！</span>`;
 }
 }
 </script>
