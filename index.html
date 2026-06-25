@@ -7,7 +7,8 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
 
-• { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+/* 加入 touch-action 提升手機點擊反應速度 */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 body {
 font-family: 'Noto Sans TC', system-ui, sans-serif;
 background-color: #f6f3eb;
@@ -27,7 +28,30 @@ text-align: center;
 border-bottom: 1px dashed rgba(61,90,128,0.2);
 position: relative;
 }
-.header h1 { font-size: 22px; font-weight: 900; color: #2a4365; margin: 0; letter-spacing: 1px; }
+.header h1 {
+font-size: 18px;
+font-weight: 900;
+color: #2a4365;
+margin: 0;
+letter-spacing: 1px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* 空白處半透明網格背景裝飾（白雲/花花） */
+.bg-deco {
+position: fixed;
+pointer-events: none; /* 絕對不會阻礙點擊 */
+z-index: -1;
+opacity: 0.25;
+user-select: none;
+animation: floatDeco 4s ease-in-out infinite alternate;
+}
+@keyframes floatDeco {
+0% { transform: translateY(0px) rotate(0deg); }
+100% { transform: translateY(-8px) rotate(8deg); }
+}
 
 /* 雙向貨幣換算器 */
 .calc-container { padding: 0 20px; margin-top: -20px; position: relative; z-index: 10; }
@@ -190,6 +214,13 @@ gap: 10px;
 </head>
 <body>
 
+<div class="bg-deco" style="top: 12%; left: 6%; font-size: 24px; animation-delay: 0s;">☁️</div>
+<div class="bg-deco" style="top: 18%; right: 8%; font-size: 20px; animation-delay: 1s;">🌸</div>
+<div class="bg-deco" style="top: 40%; left: 4%; font-size: 18px; animation-delay: 1.5s;">🌻</div>
+<div class="bg-deco" style="top: 55%; right: 7%; font-size: 22px; animation-delay: 0.5s;">☁️</div>
+<div class="bg-deco" style="top: 75%; left: 8%; font-size: 20px; animation-delay: 2s;">🌸</div>
+<div class="bg-deco" style="top: 88%; right: 5%; font-size: 18px; animation-delay: 1.2s;">🌻</div>
+
 <div id="toast" class="toast">✅ 已成功複製！</div>
 
 <div class="header">
@@ -200,12 +231,12 @@ gap: 10px;
 <div class="calc-box">
 <div class="calc-block">
 <div class="calc-label">港幣 HKD 🇭🇰</div>
-<input type="number" id="hkdInput" class="calc-input" placeholder="0">
+<input type="number" inputmode="decimal" id="hkdInput" class="calc-input" placeholder="0">
 </div>
 <div style="font-size: 11px; font-weight: bold; color: rgba(61,90,128,0.4);">⇄</div>
 <div class="calc-block jpy">
 <div class="calc-label">日圓 JPY 🇯🇵</div>
-<input type="number" id="jpyInput" class="calc-input" placeholder="0">
+<input type="number" inputmode="decimal" id="jpyInput" class="calc-input" placeholder="0">
 </div>
 </div>
 </div>
@@ -323,14 +354,11 @@ gap: 10px;
 <h3>☀️ 大阪實時天氣連線</h3>
 <button class="refresh-weather-btn" id="refresh-weather-btn">🔄 刷新天氣</button>
 </div>
-
 <div class="weather-sub-title">📱 3日動態每小時預報 (👈左右拉動 | 藍色代表建議帶遮 ☂️)</div>
 <div class="hourly-weather-scroll" id="hourly-weather-container">
 <div class="weather-loading">正在獲取大阪氣象數據...</div>
 </div>
-
 <hr class="weather-divider">
-
 <div class="weather-sub-title">📅 大阪 10日趨勢預報</div>
 <div class="daily-weather-grid" id="daily-weather-container">
 <div class="weather-loading">正在加載...</div>
@@ -339,70 +367,14 @@ gap: 10px;
 </div>
 
 <div id="sec-places" class="content-section hidden">
-<div class="place-item">
-<p class="place-cat">🏨 難波住宿大本營</p>
-<p class="place-name">HOTEL AMANEK Osaka Namba <span>(阿曼內克酒店)</span></p>
-<div class="address-box">
-<span class="address-text">大阪市中央区千日前1-9-7</span>
-<button class="copy-btn" data-copy="大阪市中央区千日前1-9-7">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">✈️ 機場</p>
-<p class="place-name">関西国際空港 (KIX) <span>(關西國際機場)</span></p>
-<div class="address-box">
-<span class="address-text">大阪府泉佐野市泉州空港北1</span>
-<button class="copy-btn" data-copy="大阪府泉佐野市泉州空港北1">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🏰 景點</p>
-<p class="place-name">大阪城公園</p>
-<div class="address-box">
-<span class="address-text">大阪府大阪市中央区大阪城1-1</span>
-<button class="copy-btn" data-copy="大阪府大阪市中央区大阪城1-1">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🎢 樂園</p>
-<p class="place-name">ユニバーサル・スタジオ・ジャパン <span>(日本環球影城)</span></p>
-<div class="address-box">
-<span class="address-text">大阪府大阪市此花区桜島2丁目1-33</span>
-<button class="copy-btn" data-copy="大阪府大阪市此花区桜島2丁目1-33">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🦌 景點</p>
-<p class="place-name">奈良公園 <span>(看小鹿)</span></p>
-<div class="address-box">
-<span class="address-text">奈良県奈良市雑司町</span>
-<button class="copy-btn" data-copy="奈良県奈良市雑司町">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🎡 景點</p>
-<p class="place-name">生駒山上遊園地</p>
-<div class="address-box">
-<span class="address-text">奈良県生駒市菜畑町2312-1</span>
-<button class="copy-btn" data-copy="奈良県生駒市菜畑町2312-1">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🏨 櫻島住宿</p>
-<p class="place-name">リーベルホテル大阪 <span>(LIBER HOTEL)</span></p>
-<div class="address-box">
-<span class="address-text">大阪府大阪市此花区桜島1丁目1-35</span>
-<button class="copy-btn" data-copy="大阪府大阪市此花区桜島1丁目1-35">📋 複製</button>
-</div>
-</div>
-<div class="place-item">
-<p class="place-cat">🎵 Live 會場</p>
-<p class="place-name">Zepp Osaka Bayside</p>
-<div class="address-box">
-<span class="address-text">大阪府大阪市此花区桜島1丁目1-61</span>
-<button class="copy-btn" data-copy="大阪府大阪市此花区桜島1丁目1-61">📋 複製</button>
-</div>
-</div>
+<div class="place-item"><p class="place-cat">🏨 難波住宿大本營</p><p class="place-name">HOTEL AMANEK Osaka Namba</p><div class="address-box"><span class="address-text">大阪市中央区千日前1-9-7</span><button class="copy-btn" data-copy="大阪市中央区千日前1-9-7">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">✈️ 機場</p><p class="place-name">関西国際空港 (KIX)</p><div class="address-box"><span class="address-text">大阪府泉佐野市泉州空港北1</span><button class="copy-btn" data-copy="大阪府泉佐野市泉州空港北1">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🏰 景點</p><p class="place-name">大阪城公園</p><div class="address-box"><span class="address-text">大阪府大阪市中央区大阪城1-1</span><button class="copy-btn" data-copy="大阪府大阪市中央区大阪城1-1">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🎢 樂園</p><p class="place-name">日本環球影城 (USJ)</p><div class="address-box"><span class="address-text">大阪府大阪市此花区桜島2丁目1-33</span><button class="copy-btn" data-copy="大阪府大阪市此花区桜島2丁目1-33">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🦌 景點</p><p class="place-name">奈良公園</p><div class="address-box"><span class="address-text">奈良県奈良市雑司町</span><button class="copy-btn" data-copy="奈良県奈良市雑司町">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🎡 景點</p><p class="place-name">生駒山上遊園地</p><div class="address-box"><span class="address-text">奈良県生駒市菜畑町2312-1</span><button class="copy-btn" data-copy="奈良県生駒市菜畑町2312-1">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🏨 櫻島住宿</p><p class="place-name">リーベルホテル大阪 (LIBER HOTEL)</p><div class="address-box"><span class="address-text">大阪府大阪市此花区桜島1丁目1-35</span><button class="copy-btn" data-copy="大阪府大阪市此花区桜島1丁目1-35">📋 複製</button></div></div>
+<div class="place-item"><p class="place-cat">🎵 Live 會場</p><p class="place-name">Zepp Osaka Bayside</p><div class="address-box"><span class="address-text">大阪府大阪市此花区桜島1丁目1-61</span><button class="copy-btn" data-copy="大阪府大阪市此花区桜島1丁目1-61">📋 複製</button></div></div>
 </div>
 
 <div id="sec-expense" class="content-section hidden">
@@ -410,14 +382,8 @@ gap: 10px;
 <div class="summary-title">旅程公費總支出</div>
 <div class="summary-total" id="exp-total-all">¥0</div>
 <div class="payer-grid">
-<div class="payer-box o">
-<div>🌟 O 已付</div>
-<div class="payer-amount" id="exp-total-o">¥0</div>
-</div>
-<div class="payer-box k">
-<div>💖 K 已付</div>
-<div class="payer-amount" id="exp-total-k">¥0</div>
-</div>
+<div class="payer-box o"><div>🌟 O 已付</div><div class="payer-amount" id="exp-total-o">¥0</div></div>
+<div class="payer-box k"><div>💖 K 已付</div><div class="payer-amount" id="exp-total-k">¥0</div></div>
 </div>
 <div class="settle-box">
 <div>⚖️ 攤分計算結果 (每人應付一半)</div>
@@ -445,14 +411,11 @@ gap: 10px;
 <div class="info-row"><span class="info-label">消防局 / 救護車 (急病)</span><span class="info-value"><a href="tel:119">119</a></span></div>
 <div class="info-row"><span class="info-label">外國人生命線 (英文/中文)</span><span class="info-value">0570-000-911</span></div>
 </div>
-
 <div class="info-card" style="border-color: #a2d2ff;">
 <div class="info-title" style="color: #0369a1;">🇭🇰 香港官方境外求助</div>
 <div class="info-row"><span class="info-label">香港入境處求助熱線</span><span class="info-value"><a href="tel:+8521868">+852 1868</a></span></div>
 <div class="info-row"><span class="info-label">入境處 App 網絡電話</span><span class="info-value">支援 (免漫遊費)</span></div>
-<div class="info-row"><span class="info-label">中國駐大阪總領事館</span><span class="info-value"><a href="tel:+81-6-6445-9481">+81-6-6445-9481</a></span></div>
 </div>
-
 <div class="info-card" style="border-color: #eed7c5;">
 <div class="info-title" style="color: #b45309;">📦 隨身保險與重要資料</div>
 <div class="info-row"><span class="info-label">海外旅遊保險單號</span><span class="info-value">可以在此自行填寫備忘</span></div>
@@ -476,7 +439,7 @@ gap: 10px;
 <button class="modal-close" id="close-modal-btn">❌</button>
 </div>
 <div class="form-group"><label>項目名稱</label><input type="text" id="in-desc" class="form-input" placeholder="例如：USJ 門票 / 拉麵"></div>
-<div class="form-group"><label>金額 (日圓 JPY ¥)</label><input type="number" id="in-cost" class="form-input" placeholder="0"></div>
+<div class="form-group"><label>金額 (日圓 JPY ¥)</label><input type="number" inputmode="decimal" id="in-cost" class="form-input" placeholder="0"></div>
 <div class="form-group">
 <label>邊個比錢先？</label>
 <div class="payer-select-grid">
@@ -490,20 +453,15 @@ gap: 10px;
 
 <div id="fullscreen-overlay" class="fullscreen-overlay hidden">
 <button class="fs-close" id="close-fs-btn">❌</button>
-<div class="fs-card"><p class="fs-text" id="fs-japanese">テキスト</p></div>
+<div class="fs-card"><p class="fs-text" id="fs-japanese"></p></div>
 <button class="fs-speak-btn" id="fs-speak-btn">🔊 播放日語發音</button>
 <p id="fs-chinese" style="color:#feFAE0; font-size:14px; font-weight:bold; margin-top:15px;"></p>
 </div>
 
 <script>
+// 資料庫與全局變數
 let modalSelectedPayer = 'O';
 let expenses = [];
-
-try {
-const saved = localStorage.getItem('osaka_expenses_pure_v4');
-if (saved) expenses = JSON.parse(saved);
-} catch(e) { console.error(e); }
-
 const phrasesData = [
 { t: "🧳 住宿與行李", k: "荷物を預かってもらえますか？", d: "請問可以幫我寄存行李嗎？" },
 { t: "☕ 點餐", k: "アイスコーヒーを一つください。", d: "請給我一杯冰美式咖啡。" },
@@ -515,91 +473,139 @@ const phrasesData = [
 { t: "📸 請求幫忙", k: "写真を撮ってもらえませんか？", d: "請問可以幫我們拍張照嗎？" }
 ];
 
-function initAll() {
-initNavigation();
-initCurrencyConverter();
-initExpenses();
-renderPhrases();
-fetchWeatherData();
+// 1. 初始化入口
+function initApp() {
+try { initExpenses(); } catch(e) { console.error(e); }
+try { initCurrencyConverter(); } catch(e) { console.error(e); }
+try { renderPhrases(); } catch(e) { console.error(e); }
+try { fetchWeatherData(); } catch(e) { console.error(e); }
+
 const refreshBtn = document.getElementById('refresh-weather-btn');
-if (refreshBtn) {
-refreshBtn.addEventListener('click', fetchWeatherData);
+if (refreshBtn) refreshBtn.addEventListener('click', fetchWeatherData);
 }
-}
+initApp();
 
-if (document.readyState === 'loading') {
-document.addEventListener('DOMContentLoaded', initAll);
-} else {
-initAll();
-}
-
-// 導覽控制 (支援6大分頁)
-function initNavigation() {
-const allTabButtons = document.querySelectorAll('.tab-btn, .nav-btn');
-const sections = ['itinerary', 'weather', 'places', 'expense', 'phrase', 'info'];
-
-allTabButtons.forEach(btn => {
-btn.addEventListener('click', function(e) {
+// 2. 最強大的全域事件委派 (解決手機 Click 無反應問題)
+document.addEventListener('click', function(e) {
+// A. 導覽列與 Tabs 切換
+const navBtn = e.target.closest('.nav-btn, .tab-btn');
+if (navBtn) {
 e.preventDefault();
-const targetTab = btn.getAttribute('data-tab');
+const targetTab = navBtn.getAttribute('data-tab');
 if (!targetTab) return;
-
-sections.forEach(sec => {
-const secEl = document.getElementById('sec-' + sec);
-if (secEl) secEl.classList.add('hidden');
-});
+document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
 const targetEl = document.getElementById('sec-' + targetTab);
 if (targetEl) targetEl.classList.remove('hidden');
-
-allTabButtons.forEach(b => {
-if (b.getAttribute('data-tab') === targetTab) {
-b.classList.add('active');
-} else {
-b.classList.remove('active');
-}
-});
-window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-});
-
-const dayButtons = document.querySelectorAll('.day-btn');
-dayButtons.forEach(btn => {
-btn.addEventListener('click', function() {
-const selectedDay = btn.getAttribute('data-day');
-if (!selectedDay) return;
-for (let i = 1; i <= 5; i++) {
-const dayContent = document.getElementById('day-content-' + i);
-if (dayContent) dayContent.classList.add('hidden');
-}
-const targetDayContent = document.getElementById('day-content-' + selectedDay);
-if (targetDayContent) targetDayContent.classList.remove('hidden');
-
-dayButtons.forEach(b => {
-if (b.getAttribute('data-day') === selectedDay) b.classList.add('active');
+document.querySelectorAll('.nav-btn, .tab-btn').forEach(b => {
+if (b.getAttribute('data-tab') === targetTab) b.classList.add('active');
 else b.classList.remove('active');
 });
-});
-});
+window.scrollTo({ top: 0, behavior: 'smooth' });
+return;
 }
 
+// B. Day 切換
+const dayBtn = e.target.closest('.day-btn');
+if (dayBtn) {
+e.preventDefault();
+const selectedDay = dayBtn.getAttribute('data-day');
+if (!selectedDay) return;
+document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+dayBtn.classList.add('active');
+document.querySelectorAll('.day-content').forEach(content => {
+if (content.id === 'day-content-' + selectedDay) content.classList.remove('hidden');
+else content.classList.add('hidden');
+});
+return;
+}
+
+// C. 地址複製
+const copyBtn = e.target.closest('.copy-btn');
+if (copyBtn) {
+const text = copyBtn.getAttribute('data-copy');
+if (!text) return;
+const el = document.createElement('textarea');
+el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+const toast = document.getElementById('toast');
+if (toast) {
+toast.innerText = "✅ 已成功複製！";
+toast.classList.add('show');
+setTimeout(() => toast.classList.remove('show'), 2000);
+}
+return;
+}
+
+// D. 語音播放 (清單內)
+const voiceBtn = e.target.closest('.voice-btn');
+if (voiceBtn) {
+e.stopPropagation(); // 防止觸發外層卡片放大
+const text = voiceBtn.getAttribute('data-text');
+if (text) playVoice(text);
+return;
+}
+
+// E. 點擊日語卡片放大
+const phraseItem = e.target.closest('.phrase-item');
+if (phraseItem) {
+const jp = phraseItem.getAttribute('data-jp');
+const zh = phraseItem.getAttribute('data-zh');
+document.getElementById('fs-japanese').innerText = jp;
+document.getElementById('fs-chinese').innerText = "中文意思：" + zh;
+const overlay = document.getElementById('fullscreen-overlay');
+if (overlay) overlay.classList.remove('hidden');
+
+const speakBtn = document.getElementById('fs-speak-btn');
+if (speakBtn) {
+const newBtn = speakBtn.cloneNode(true);
+speakBtn.parentNode.replaceChild(newBtn, speakBtn);
+newBtn.addEventListener('click', () => playVoice(jp));
+}
+return;
+}
+
+// F. 關閉大字報
+const closeFsBtn = e.target.closest('#close-fs-btn, #fullscreen-overlay');
+if (closeFsBtn && !e.target.closest('.fs-card')) {
+const overlay = document.getElementById('fullscreen-overlay');
+if (overlay) overlay.classList.add('hidden');
+return;
+}
+});
+
+// 3. 匯率轉換器
 function initCurrencyConverter() {
 const hkdInput = document.getElementById('hkdInput');
 const jpyInput = document.getElementById('jpyInput');
+const rate = 20.0;
+
+function toJPY() {
+const val = parseFloat(hkdInput.value);
+jpyInput.value = isNaN(val) ? '' : Math.round(val * rate);
+}
+function toHKD() {
+const val = parseFloat(jpyInput.value);
+hkdInput.value = isNaN(val) ? '' : (val / rate).toFixed(2);
+}
 
 if (hkdInput && jpyInput) {
-hkdInput.addEventListener('input', function() {
-const hkdVal = hkdInput.value;
-if (hkdVal === '' || isNaN(hkdVal)) { jpyInput.value = ''; return; }
-jpyInput.value = Math.round(parseFloat(hkdVal) * 20);
-});
-jpyInput.addEventListener('input', function() {
-const jpyVal = jpyInput.value;
-if (jpyVal === '' || isNaN(jpyVal)) { hkdInput.value = ''; return; }
-hkdInput.value = (parseFloat(jpyVal) / 20).toFixed(2);
+['input', 'keyup', 'change'].forEach(evt => {
+hkdInput.addEventListener(evt, toJPY);
+jpyInput.addEventListener(evt, toHKD);
 });
 }
 }
 
+// 4. 發音引擎
+function playVoice(text) {
+if ('speechSynthesis' in window) {
+window.speechSynthesis.cancel();
+const utterance = new SpeechSynthesisUtterance(text);
+utterance.lang = 'ja-JP'; utterance.rate = 0.85;
+window.speechSynthesis.speak(utterance);
+} else { alert("目前裝置不支援日語朗讀。"); }
+}
+
+// 5. 天氣 API 連線
 async function fetchWeatherData() {
 const hourlyContainer = document.getElementById('hourly-weather-container');
 const dailyContainer = document.getElementById('daily-weather-container');
@@ -616,7 +622,7 @@ hourlyContainer.innerHTML = '';
 const hourly = data.hourly;
 for (let i = 0; i < 72; i++) {
 const dateObj = new Date(hourly.time[i]);
-const formattedTime = ${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:00`;
+const formattedTime = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:00`;
 const temp = Math.round(hourly.temperature_2m[i]);
 const pop = hourly.precipitation_probability[i];
 const icon = parseWeatherIcon(hourly.weather_code[i]);
@@ -624,9 +630,7 @@ const icon = parseWeatherIcon(hourly.weather_code[i]);
 const div = document.createElement('div');
 div.className = 'hourly-item';
 if (pop >= 40) { div.style.background = '#e0f2fe'; div.style.borderColor = '#7dd3fc'; }
-div.innerHTML = &lt;span class="hourly-time"&gt;${formattedTime}</span>
-<span class="hourly-icon">{temp}°C</span>
-<span class="hourly-pop">💧${pop}%&lt;/span&gt;;
+div.innerHTML = `<span class="hourly-time">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
 hourlyContainer.appendChild(div);
 }
 
@@ -634,15 +638,14 @@ dailyContainer.innerHTML = '';
 const daily = data.daily;
 for (let i = 0; i < 10; i++) {
 const dateObj = new Date(daily.time[i]);
-const formattedDate = ``${dateObj.getMonth() + 1}/${dateObj.getDate()};
+const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
 const maxT = Math.round(daily.temperature_2m_max[i]);
 const minT = Math.round(daily.temperature_2m_min[i]);
 const icon = parseWeatherIcon(daily.weather_code[i]);
 
 const div = document.createElement('div');
 div.className = 'daily-item';
-div.innerHTML = &lt;span class="daily-date"&gt;${formattedDate}</span>
-<span class="daily-icon">{minT}°~${maxT}°&lt;/span&gt;;
+div.innerHTML = `<span class="daily-date">${formattedDate}</span><span class="daily-icon">${icon}</span><span class="daily-temp">${minT}°~${maxT}°</span>`;
 dailyContainer.appendChild(div);
 }
 } catch (err) {
@@ -658,39 +661,29 @@ if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return '🌧️';
 return '☁️';
 }
 
-document.querySelectorAll('.copy-btn').forEach(btn => {
-btn.addEventListener('click', function() {
-const text = btn.getAttribute('data-copy');
-const el = document.createElement('textarea');
-el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-const toast = document.getElementById('toast');
-if (toast) {
-toast.innerText = "✅ 已成功複製日文地址！";
-toast.classList.add('show');
-setTimeout(() => toast.classList.remove('show'), 2000);
-}
-});
-});
-
-function playVoice(text, e) {
-if (e) e.stopPropagation();
-if ('speechSynthesis' in window) {
-window.speechSynthesis.cancel();
-const utterance = new SpeechSynthesisUtterance(text);
-utterance.lang = 'ja-JP'; utterance.rate = 0.85;
-window.speechSynthesis.speak(utterance);
-} else { alert("目前裝置不支援日語朗讀。"); }
+// 6. 渲染日文短語
+function renderPhrases() {
+const container = document.getElementById('phrase-list-container');
+if (!container) return;
+container.innerHTML = phrasesData.map(item => `<div class="phrase-item" data-jp="${item.k}" data-zh="${item.d}">
+<p class="place-cat">${item.t}</p>
+<div class="phrase-jp-box">
+<p class="phrase-jp">${item.k}</p>
+<button class="voice-btn" data-text="${item.k}">🔊</button>
+</div>
+<p class="phrase-zh">💡 中文：${item.d}</p> </div>`).join('');
 }
 
+// 7. 記帳系統邏輯
 function initExpenses() {
+try {
+const saved = localStorage.getItem('osaka_expenses_pure_v5');
+if (saved) expenses = JSON.parse(saved);
+} catch(e) {}
+
 renderExpenses();
 
 const addBtn = document.getElementById('add-expense-btn');
-const closeBtn = document.getElementById('close-modal-btn');
-const pbtnO = document.getElementById('pbtn-O');
-const pbtnK = document.getElementById('pbtn-K');
-const submitBtn = document.getElementById('submit-expense-btn');
-
 if (addBtn) addBtn.addEventListener('click', () => {
 const modal = document.getElementById('expense-modal');
 if (modal) modal.classList.remove('hidden');
@@ -698,12 +691,19 @@ document.getElementById('in-desc').value = '';
 document.getElementById('in-cost').value = '';
 switchModalPayer('O');
 });
+
+const closeBtn = document.getElementById('close-modal-btn');
 if (closeBtn) closeBtn.addEventListener('click', () => {
 const modal = document.getElementById('expense-modal');
 if (modal) modal.classList.add('hidden');
 });
+
+const pbtnO = document.getElementById('pbtn-O');
 if (pbtnO) pbtnO.addEventListener('click', () => switchModalPayer('O'));
+const pbtnK = document.getElementById('pbtn-K');
 if (pbtnK) pbtnK.addEventListener('click', () => switchModalPayer('K'));
+
+const submitBtn = document.getElementById('submit-expense-btn');
 if (submitBtn) submitBtn.addEventListener('click', submitExpenseItem);
 }
 
@@ -725,7 +725,7 @@ const desc = document.getElementById('in-desc').value.trim();
 const cost = parseInt(document.getElementById('in-cost').value);
 if (!desc || isNaN(cost) || cost <= 0) { alert("請完整輸入項目名稱及大於0的金額！"); return; }
 expenses.push({ id: Date.now(), desc: desc, cost: cost, payer: modalSelectedPayer });
-localStorage.setItem('osaka_expenses_pure_v4', JSON.stringify(expenses));
+localStorage.setItem('osaka_expenses_pure_v5', JSON.stringify(expenses));
 renderExpenses();
 const modal = document.getElementById('expense-modal');
 if (modal) modal.classList.add('hidden');
@@ -734,7 +734,7 @@ if (modal) modal.classList.add('hidden');
 window.deleteExpense = function(id) {
 if (confirm("確定要刪除呢筆帳目？")) {
 expenses = expenses.filter(i => i.id !== id);
-localStorage.setItem('osaka_expenses_pure_v4', JSON.stringify(expenses));
+localStorage.setItem('osaka_expenses_pure_v5', JSON.stringify(expenses));
 renderExpenses();
 }
 };
@@ -750,19 +750,20 @@ if (item.payer === 'O') totalO += item.cost;
 if (item.payer === 'K') totalK += item.cost;
 const div = document.createElement('div');
 div.className = 'expense-item';
-div.innerHTML = &lt;div class="expense-info"&gt; &lt;span class="expense-desc"&gt;${item.desc}</span>
-<span class="badge {item.payer === 'O' ? '🌟 O 先付' : '💖 K 先付'}</span>
+div.innerHTML = `<div class="expense-info"> <span class="expense-desc">${item.desc}</span>
+<span class="badge ${item.payer === 'O' ? 'o' : 'k'}">${item.payer === 'O' ? '🌟 O 先付' : '💖 K 先付'}</span>
 </div>
 <div class="expense-cost">
-<span>¥{item.id})">❌</button>
-</div>
-`;
+<span>¥${item.cost.toLocaleString()}</span>
+<button class="del-btn" onclick="deleteExpense(${item.id})">❌</button>
+</div>`;
 container.appendChild(div);
 });
 
 const totalAll = totalO + totalK;
-document.getElementById('exp-total-all').innerText = ¥${totalAll.toLocaleString()}; document.getElementById('exp-total-o').innerText =¥${totalO.toLocaleString()};
-document.getElementById('exp-total-k').innerText = ¥${totalK.toLocaleString()}`;
+document.getElementById('exp-total-all').innerText = `¥${totalAll.toLocaleString()}`; 
+document.getElementById('exp-total-o').innerText = `¥${totalO.toLocaleString()}`;
+document.getElementById('exp-total-k').innerText = `¥${totalK.toLocaleString()}`;
 
 const half = totalAll / 2;
 const settleEl = document.getElementById('settle-msg');
@@ -770,49 +771,13 @@ if (settleEl) {
 if (totalAll === 0) {
 settleEl.innerText = "尚未有消費紀錄";
 } else if (totalO > totalK) {
-settleEl.innerHTML = 💖 K 需要比返 🌟 O &lt;div class="settle-result"&gt;¥${Math.round(half - totalK).toLocaleString()}</div>; } else if (totalK &gt; totalO) { settleEl.innerHTML =🌟 O 需要比返 💖 K <div class="settle-result">¥${Math.round(half - totalO).toLocaleString()}&lt;/div>;
-} else {
-settleEl.innerHTML = <span style="color:#10b981;"&gt;🎉 帳目完美平分，互不相欠！&lt;/span>;
+settleEl.innerHTML = `💖 K to 🌟 O <div class="settle-result">¥${Math.round(half - totalK).toLocaleString()}</div>`; 
+} else if (totalK > totalO) { 
+settleEl.innerHTML = `🌟 O to 💖 K <div class="settle-result">¥${Math.round(half - totalO).toLocaleString()}</div>`; 
+} else { 
+settleEl.innerHTML = `<span style="color:#10b981;">🎉 DONE！</span>`;
 }
 }
-}
-
-function renderPhrases() {
-const container = document.getElementById('phrase-list-container');
-if (!container) return;
-container.innerHTML = '';
-
-phrasesData.forEach(item => {
-const div = document.createElement('div');
-div.className = 'phrase-item';
-div.addEventListener('click', () => {
-document.getElementById('fs-japanese').innerText = item.k;
-document.getElementById('fs-chinese').innerText = "中文意思：" + item.d;
-const overlay = document.getElementById('fullscreen-overlay');
-if (overlay) overlay.classList.remove('hidden');
-const speakBtn = document.getElementById('fs-speak-btn');
-if (speakBtn) {
-const newBtn = speakBtn.cloneNode(true);
-speakBtn.parentNode.replaceChild(newBtn, speakBtn);
-newBtn.addEventListener('click', (e) => playVoice(item.k, e));
-}
-});
-div.innerHTML = &lt;p style="font-size:10px; font-weight:bold; color:rgba(61,90,128,0.4); margin:0 0 6px 0;"&gt;${item.t}</p>
-<div class="phrase-jp-box">
-<p class="phrase-jp">{item.d}</p>
-`;
-const voiceBtn = div.querySelector('.voice-btn');
-if (voiceBtn) voiceBtn.addEventListener('click', (e) => playVoice(item.k, e));
-container.appendChild(div);
-});
-
-const closeFsBtn = document.getElementById('close-fs-btn');
-const fsOverlay = document.getElementById('fullscreen-overlay');
-const fsCard = document.querySelector('.fs-card');
-
-if (closeFsBtn) closeFsBtn.addEventListener('click', () => { if (fsOverlay) fsOverlay.classList.add('hidden'); });
-if (fsOverlay) fsOverlay.addEventListener('click', () => { fsOverlay.classList.add('hidden'); });
-if (fsCard) fsCard.addEventListener('click', (e) => e.stopPropagation());
 }
 </script>
 </body>
