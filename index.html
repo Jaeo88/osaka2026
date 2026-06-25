@@ -49,12 +49,11 @@ animation: floatDeco 4s ease-in-out infinite alternate;
 100% { transform: translateY(-8px) rotate(8deg); }
 }
 
-/* ================= 1. 雙向貨幣換算器 (更新版) ================= */
+/* ================= 1. 雙向貨幣換算器 ================= */
 .calc-container { padding: 0 20px; margin-top: -20px; position: relative; z-index: 10; }
 .calc-box {
 background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); border-radius: 16px;
-padding: 15px 15px 28px 15px; /* 加大底部 padding 容納匯率設定 */
-border: 1px dashed #eed7c5; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+padding: 15px 15px 28px 15px; border: 1px dashed #eed7c5; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 display: flex; align-items: center; gap: 10px; position: relative;
 }
 .calc-block { flex: 1; text-align: center; background: #fdfaf6; padding: 8px; border-radius: 12px; border: 1px solid #eed7c5; }
@@ -62,11 +61,10 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .calc-label { font-size: 10px; font-weight: bold; color: #b45309; margin-bottom: 3px; }
 .calc-block.jpy .calc-label { color: #0369a1; }
 .calc-input { width: 100%; text-align: center; font-size: 18px; font-weight: 900; color: #3d5a80; background: transparent; border: none; outline: none; }
-/* 自訂匯率框 */
 .rate-config { position: absolute; bottom: 6px; right: 15px; font-size: 10px; font-weight: bold; color: rgba(61,90,128,0.5); display: flex; align-items: center; gap: 4px; }
 .rate-input { width: 45px; background: rgba(255,255,255,0.5); border: 1px solid rgba(61,90,128,0.2); border-radius: 4px; font-size: 10px; padding: 2px 4px; color: #3d5a80; text-align: center; font-weight: bold; outline: none; }
 
-/* ================= 天氣看板樣式 (還原夏日風 + 增加預警) ================= */
+/* ================= 天氣看板樣式 ================= */
 .weather-section { background: rgba(255,255,255,0.95); border-radius: 20px; padding: 15px; border: 1px dashed rgba(61,90,128,0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
 .weather-title-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .weather-title-box h3 { font-size: 14px; margin: 0; color: #2a4365; font-weight: 900; }
@@ -75,7 +73,7 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .hourly-weather-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
 .hourly-weather-scroll::-webkit-scrollbar { height: 5px; }
 .hourly-weather-scroll::-webkit-scrollbar-thumb { background: rgba(61,90,128,0.15); border-radius: 3px; }
-.hourly-item { flex-shrink: 0; width: 70px; background: #fdfaf6; border: 1px solid #eed7c5; border-radius: 10px; padding: 8px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: all 0.3s; }
+.hourly-item { flex-shrink: 0; width: 70px; background: #fdfaf6; border: 1px solid #eed7c5; border-radius: 10px; padding: 8px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .hourly-time { font-size: 9px; color: rgba(61,90,128,0.6); font-weight: bold; white-space: nowrap; }
 .hourly-icon { font-size: 18px; }
 .hourly-temp { font-size: 13px; font-weight: 900; color: #2a4365; }
@@ -87,11 +85,10 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .daily-icon { font-size: 16px; }
 .daily-temp { font-size: 9px; font-weight: bold; color: #2a4365; white-space: nowrap; }
 .weather-loading { width: 100%; text-align: center; font-size: 12px; color: rgba(61,90,128,0.5); padding: 15px 0; font-weight: bold; }
-/* 防災橫幅 */
 .disaster-btn { display: block; width: 100%; background: #fff1f2; border: 1px dashed #fda4af; color: #e11d48; text-align: center; padding: 10px; border-radius: 12px; font-size: 12px; font-weight: 900; text-decoration: none; margin-bottom: 12px; }
 .weather-alert { background: #fee2e2; border: 1px solid #ef4444; color: #b91c1c; border-radius: 10px; padding: 10px; font-size: 12px; font-weight: bold; margin-bottom: 15px; text-align: center; display: none; }
 
-/* 🚀 攻略 Tips 專用樣式 */
+/* ================= 🚀 攻略 Tips 專用樣式 ================= */
 .tips-block { margin-bottom: 22px; }
 .tips-block-title { font-size: 14px; color: #0369a1; font-weight: 900; margin: 0 0 10px 0; padding-bottom: 6px; border-bottom: 1px dashed rgba(2,132,199,0.2); display: flex; align-items: center; gap: 4px; }
 .tips-highlight-red { font-size: 12px; font-weight: bold; color: #e11d48; background: #fff1f2; padding: 8px 12px; border-radius: 10px; border: 1px dashed #fda4af; margin-bottom: 12px; line-height: 1.5; }
@@ -148,7 +145,7 @@ display: flex; align-items: center; gap: 10px; position: relative;
 .info-value { font-size: 13px; font-weight: 900; color: #1e3a8a; }
 .info-value a { color: #0284c7; text-decoration: none; }
 
-/* ================= 記帳分帳樣式 (已升級) ================= */
+/* ================= 記帳分帳樣式 ================= */
 .summary-card { text-align: center; background: white; border-radius: 20px; padding: 20px; border: 1px dashed rgba(61,90,128,0.2); margin-bottom: 15px; position: relative; overflow: hidden; }
 .summary-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(to right, #38bdf8, #f472b6); }
 .summary-title { font-size: 11px; font-weight: bold; color: rgba(61,90,128,0.5); letter-spacing: 1px; margin: 5px 0 2px 0; }
@@ -362,8 +359,8 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 </div>
 
 <div class="tips-block">
-<h3 class="tips-block-title">1️⃣ 環球影城 (USJ) 完全作戰 ＆ 搶整理券攻略</h3>
-<div class="tips-highlight-red">7 月正值暑假，加上天氣炎熱，請務必開啟「高效率模式」：</div>
+<h3 class="tips-block-title">1️⃣ 環球影城 (USJ) 完全作戰攻略</h3>
+<div class="tips-highlight-red">🔥 7 月正值暑假，加上天氣炎熱，請務必開啟「高效率模式」：</div>
 <ul class="tips-ul">
 <li><strong>提早入園（潛規則）：</strong>官方寫 09:00 開門，但通常 08:15-08:30 就會提早放人入園。請務必在 08:15 前抵達門口排隊。</li>
 </ul>
@@ -382,21 +379,21 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <li>截圖保存搶到的 QR Code。（註：哈利波特園區現在通常不用整理券，除非人潮極度爆滿）</li>
 </ol>
 
-<div class="tips-sub-header">⚡ 不買 Express（快速通關）的續命大招：「Single Rider (單人騎士)」</div>
+<div class="tips-sub-header">⚡ 續命大招：「Single Rider (單人騎士)」</div>
 <div class="tips-box-blue">
-如果你們不介意分開坐（玩設施時不坐隔壁，但排隊是一起排），可以走 Single Rider 通道（適用於瑪利歐賽車、飛天翼龍、荷里活美夢乘車遊）。排隊時間通常會比一般通道縮短一半以上！
+💡 如果你們不介意分開坐（玩設施時不坐隔壁，但排隊是一起排），可以走 Single Rider 通道（適用於瑪利歐賽車、飛天翼龍、荷里活美夢乘車遊）。排隊時間通常會比一般通道縮短一半以上！
 </div>
 
-<div class="tips-sub-header">🎒 抗暑防 M 到物資：</div>
+<div class="tips-sub-header">🎒 抗暑物資：</div>
 <div class="tips-box-pink">
-樂園內極度曝曬。請帶備防曬傘、手持風扇、冰感濕紙巾。如果正值生理期，入園前先食一粒 EVE 止痛藥，並在園內多補充運動飲料（寶礦力），避免中暑及體力透支。
+🥵 樂園內極度曝曬。請帶備防曬傘、手持風扇、冰感濕紙巾。<br> 多補充運動飲料（寶礦力），避免中暑及體力透支。
 </div>
 </div>
 
 <div class="tips-block">
 <h3 class="tips-block-title">2️⃣ 生駒山落日飛車 Tips</h3>
 <ul class="tips-ul">
-<li><strong>山頂氣溫較低：</strong>生駒山頂海拔較高，黃昏日落後配合山風，體感溫度會比難波市區低 3-4 度。M 到期間身體容易沾寒沾凍，當天背包裡一定要帶一件薄外套或披肩。</li>
+<li><strong>山頂氣溫較低：</strong>生駒山頂海拔較高，黃昏日落後配合山風，體感溫度會比難波市區低 3-4 度。當天背包裡一定要帶一件薄外套或披肩。</li>
 <li><strong>搶位時間：</strong>18:15 抵達山上後，請直接跟著人群去排「空中單軌單車」，此時通常需要排隊 20-30 分鐘，排到時剛好能迎來 19:00 左右最美的魔幻晚霞。</li>
 </ul>
 </div>
@@ -422,7 +419,7 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <h3>☀️ 大阪實時天氣連線</h3>
 <button class="refresh-weather-btn" id="refresh-weather-btn">🔄 刷新天氣</button>
 </div>
-<div class="weather-sub-title">📱 3日動態每小時預報 (👈已自動過濾過往時間 | 藍色代表建議帶遮 ☂️)</div>
+<div class="weather-sub-title">📱 3日動態每小時預報 (👈 藍色代表建議帶遮 ☂️)</div>
 <div class="hourly-weather-scroll" id="hourly-weather-container">
 <div class="weather-loading">正在獲取大阪氣象數據...</div>
 </div>
@@ -507,7 +504,7 @@ Rate: <input type="number" id="rateInput" class="rate-input" value="0.05" step="
 <button class="nav-btn" data-tab="places"><span class="nav-icon">📍</span><span class="nav-text">地點</span></button>
 <button class="nav-btn" data-tab="expense"><span class="nav-icon">📒</span><span class="nav-text">分帳</span></button>
 <button class="nav-btn" data-tab="phrase"><span class="nav-icon">🗣️</span><span class="nav-text">日語</span></button>
-<button class="nav-btn" data-tab="info"><span class="nav-icon">ℹ</span><span class="nav-text">資訊</span></button>
+<button class="nav-btn" data-tab="info"><span class="nav-icon">ℹ️</span><span class="nav-text">資訊</span></button>
 </div>
 
 <div id="expense-modal" class="modal-overlay hidden">
@@ -666,7 +663,6 @@ if (hkdInput && jpyInput && rateInput) {
 jpyInput.addEventListener(evt, toHKD);
 hkdInput.addEventListener(evt, toJPY);
 });
-// 匯率變動時重算分帳
 rateInput.addEventListener('change', () => {
 toHKD();
 renderExpenses();
@@ -683,7 +679,7 @@ window.speechSynthesis.speak(utterance);
 } else { alert("目前裝置不支援日語朗讀。"); }
 }
 
-// 完美夏日天氣 + 惡劣預警 (更新：已過去的時間可以自己消失 ＆ 高亮「現在」卡片)
+// ================= ☀️ 天氣 API (已升級：參考 Google 樣式隱藏過去時間) =================
 async function fetchWeatherData() {
 const hourlyContainer = document.getElementById('hourly-weather-container');
 const dailyContainer = document.getElementById('daily-weather-container');
@@ -697,7 +693,6 @@ try {
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=Asia%2FTokyo&forecast_days=10');
 const data = await response.json();
 
-// 惡劣天氣預警邏輯
 const currCode = data.current_weather.weathercode;
 if ([65, 80, 81, 82, 95, 96, 99].includes(currCode)) {
 alertBox.style.display = 'block';
@@ -708,19 +703,23 @@ alertBox.style.display = 'none';
 hourlyContainer.innerHTML = '';
 const hourly = data.hourly;
 
-// 取得當前時間點（往前減45分鐘以保證當前小時不會漏掉）
-const timeThreshold = new Date().getTime() - 45 * 60 * 1000;
-let displayedHoursCount = 0;
+// ✨ 核心邏輯：直接找出氣象廳回傳的「現在這個小時」來做起點，完全解決時區與過往時間問題！
+const currentTimeStr = data.current_weather.time; 
+let startIndex = hourly.time.indexOf(currentTimeStr);
+if (startIndex === -1) startIndex = 0; // 防呆機制
 
-for (let i = 0; i < hourly.time.length; i++) {
-const dateObj = new Date(hourly.time[i]);
+let displayedCount = 0;
 
-// 1) 已過去的時間直接 skip 跳過
-if (dateObj.getTime() < timeThreshold) continue;
-// 2) 最多連續顯示未來的 72 個小時（維持 3 日動態每小時預報）
-if (displayedHoursCount >= 72) break;
+// 從現在這個小時開始往後跑，最多顯示連續 72 個小時
+for (let i = startIndex; i < hourly.time.length; i++) {
+if (displayedCount >= 72) break;
 
-let formattedTime = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:00`;
+const timeStr = hourly.time[i]; // 格式會是 "2024-07-09T14:00"
+const [datePart, hourPart] = timeStr.split('T');
+const [year, month, day] = datePart.split('-');
+const [hour, min] = hourPart.split(':');
+
+let formattedTime = `${parseInt(month)}/${parseInt(day)} ${hour}:00`;
 const temp = Math.round(hourly.temperature_2m[i]);
 const pop = hourly.precipitation_probability[i];
 const icon = parseWeatherIcon(hourly.weather_code[i]);
@@ -728,20 +727,18 @@ const icon = parseWeatherIcon(hourly.weather_code[i]);
 const div = document.createElement('div');
 div.className = 'hourly-item';
 
-// 🌟 參考 Google 天氣設計：為第一個即「現在」的時間塊做專屬清新風格高亮
-if (displayedHoursCount === 0) {
+// ✨ 如果是第一格(即現在的時間)，給予特殊高亮外觀 (Google 天氣樣式)
+if (displayedCount === 0) {
 formattedTime = "現在";
 div.style.border = '2px solid #0284c7';
 div.style.background = '#e0f2fe';
-div.style.boxShadow = '0 2px 8px rgba(2, 132, 199, 0.15)';
-} else if (pop >= 40) { 
-div.style.background = '#e0f2fe'; 
-div.style.borderColor = '#7dd3fc'; 
+div.innerHTML = `<span class="hourly-time" style="color:#0284c7; font-size:11px;">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
+} else {
+if (pop >= 40) { div.style.background = '#e0f2fe'; div.style.borderColor = '#7dd3fc'; }
+div.innerHTML = `<span class="hourly-time">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
 }
-
-div.innerHTML = `<span class="hourly-time" style="${displayedHoursCount === 0 ? 'color:#0284c7; font-weight:900;' : ''}">${formattedTime}</span><span class="hourly-icon">${icon}</span><span class="hourly-temp">${temp}°C</span><span class="hourly-pop">💧${pop}%</span>`;
 hourlyContainer.appendChild(div);
-displayedHoursCount++;
+displayedCount++;
 }
 
 dailyContainer.innerHTML = '';
@@ -784,19 +781,19 @@ container.innerHTML = phrasesData.map(item => `<div class="phrase-item" data-jp=
 <p class="phrase-zh">💡 中文：${item.d}</p> </div>`).join('');
 }
 
-// 記帳系統邏輯 (終極混合計算版)
+// 記帳系統邏輯
 window.openExpenseModal = function(payer) {
 modalSelectedPayer = payer;
 document.getElementById('modal-title-text').innerText = payer === 'K' ? '💖 K 幫手畀錢' : '🌟 O 幫手畀錢';
 document.getElementById('in-desc').value = '';
 document.getElementById('in-cost').value = '';
-switchCurrency('JPY'); // 每次打開預設 JPY
+switchCurrency('JPY');
 document.getElementById('expense-modal').classList.remove('hidden');
 };
 
 function initExpenses() {
 try {
-const saved = localStorage.getItem('osaka_expenses_pure_v7'); // 更新 KEY 防撞車
+const saved = localStorage.getItem('osaka_expenses_pure_v7');
 if (saved) expenses = JSON.parse(saved);
 } catch(e) {}
 
@@ -806,7 +803,6 @@ document.getElementById('close-modal-btn').addEventListener('click', () => {
 document.getElementById('expense-modal').classList.add('hidden');
 });
 
-// 幣值切換按鈕
 document.getElementById('curr-JPY').addEventListener('click', () => switchCurrency('JPY'));
 document.getElementById('curr-HKD').addEventListener('click', () => switchCurrency('HKD'));
 
@@ -880,14 +876,11 @@ ${isHKD ? '<span class="badge hkd">HKD</span>' : ''}
 container.appendChild(div);
 });
 
-// 更新上方兩格介面
 document.getElementById('exp-total-k').innerHTML = `¥${k_jpy.toLocaleString()}<br><span style="font-size:11px; color:#9d174d;">+$${k_hkd.toLocaleString()}</span>`;
 document.getElementById('exp-total-o').innerHTML = `¥${o_jpy.toLocaleString()}<br><span style="font-size:11px; color:#075985;">+$${o_hkd.toLocaleString()}</span>`;
 
-// 獲取當前自訂匯率
 const rate = parseFloat(document.getElementById('rateInput').value) || 0.05;
 
-// 計算純港幣等值
 const k_total_in_hkd = k_hkd + (k_jpy * rate);
 const o_total_in_hkd = o_hkd + (o_jpy * rate);
 const grand_total_hkd = k_total_in_hkd + o_total_in_hkd;
@@ -899,11 +892,9 @@ const settleEl = document.getElementById('settle-msg');
 if (grand_total_hkd === 0) {
 settleEl.innerText = "尚未有消費紀錄";
 } else if (o_total_in_hkd > k_total_in_hkd) {
-// O 比得多，K 畀返 O
 const owe = Math.round(half_hkd - k_total_in_hkd);
 settleEl.innerHTML = `💖 K 👉🏻 🌟 O <br><div class="settle-result">$${owe.toLocaleString()}</div>`; 
 } else if (k_total_in_hkd > o_total_in_hkd) { 
-// K 比得多，O 畀返 K
 const owe = Math.round(half_hkd - o_total_in_hkd);
 settleEl.innerHTML = `🌟 O 👉🏻 💖 K <br><div class="settle-result">$${owe.toLocaleString()}</div>`; 
 } else { 
